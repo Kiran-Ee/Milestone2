@@ -1,9 +1,57 @@
 ####################################################################################################
 ---:ASSIGNMENT:---
 GOAL:
-    -]
+    - ] Read Valid MIPS Assembly File ->
+                                        1] .text file w/ text section
+                                        +
+                                        2] .data files w/ data section
 REQUIREMENTS:
-    ->
-        -]
-SUBMISSION:
-    ->
+    -> PSEUDO-INSTRUCTIONS:
+        - ] li, la, blt: each of these use as least 2 other "valid" MIPS instructions to work.
+
+    -> INPUT & OUTPUT:
+        - ] INPUT: Run Jar, take in "assembly file path" ("test".asm).
+            - ] "test.asm" -> "test.text" + "test.data" ... the name ("test") MUST match.
+                - ] .text: Contains assembled contents of the ".text" section in the ".asm" file.
+                - ] .data: Contains assembled contents of the ".data" section in the ".asm" file.
+        - ] OUTPUT: Output files should be in same directory as input file (which may/may not be same as JAR?).
+            - ] Each line contains one 32-bit value hexadecimal form ... no "0x" ... must be lowercase
+
+    -> TEST DATA:
+        - ] Download "EvenOrOdd.asm" from Canvas, assemble in Mars,  go to "File->Dump Memory", select "hexadecimal" & .data or .text
+
+    -> SECTIONS:
+        - ] text & data are only 2 sections in the file, begins with .data or .text, ends when hits the other label or end.
+
+    -> DATA SECTION:
+        - ] Each line could be: empty or have spaces/tabs, have a comment (and spaces in the comment), or a data declaration.
+            - ] Ignore empty or comments
+        - ] Data Declaration Format: [0 or more spaces/tabs][label name][colon][1 or more spaces/tabs][data type][1 or more spaces/tabs][data][possible more spaces/tabs or a comment]
+            - ] Data Types: Need to support .asciiz (# of bytes in string + 1) & .word (4 bytes)... DON"T need to support Arrays.
+            - ] Data: .word = decimal or hexadecimal ... .asciiz = "some # of chars with double qoutes on either side"
+                - ] "Pack data": small endian
+            - ] Address: need to keep track of the data's address so they can be referenced in .text
+                - ] 1st data address: 0x10010000
+                - ] All other address: determined by previous data
+
+    -> TEXT SECTION:
+        - ] Each line could be: empty or have spaces/tabs, have a comment (and spaces in the comment), have a LABEL declaration
+         ... (label name then colon - any # of spaces), or an instruction.
+        - ] Format: match Milestone1 ... BUT ...
+           - ] Need to deal with Pseudos (replace them w/ correct instructions)
+           - ] Branch (signed offset from "PC+4") & J (exact address) have Labels NOT immediates now.
+        - ] All addresses should be WORD ADDRESSING, not Byte.
+           - ] Labels in .text refer to memory addresses to subsequent instructions in .text section (not in .data)
+
+     -> COMMON MISTAKES:
+        - ] Values in .data are not small endian, branch offsets off by 1 instruction, branch offset or jump address are byte addressed, output is named incorrectly or with wrong directory, not doing pseudoinstructions
+
+    -> SCORING:
+        parsing the file into .data and .text sections (5 points)
+        parsing the .data section (10 points)
+        calculating data sizes (10 points)
+        calculating label addresses in .data section (10 points)
+        parsing the .text section (10 points)
+        identifying and replacing pseudo instructions (10 points)
+        calculating label addresses in .text section (10 points)
+        replacing labels with offsets/addresses for branch/jump instructions (10 points)

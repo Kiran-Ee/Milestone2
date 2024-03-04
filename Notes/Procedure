@@ -1,8 +1,28 @@
 ####################################################################################################
 ---:PROCEDURE:---
-[1]
+[1] Parse File Into .data & .text
 
-[2]
+[2a]
+    DATA:
+    - Iterate through every line ...
+        [I] Clean the data declaration for the [label name, colon, data type, and data] ... ignoring empty lines/comments
 
-[3]
+        [II] Find Data Type (word or string)
+
+        [III] Find amount of memory (4 or "# chars + 1")
+
+        [IV] Calculate Address: .word can be hex/dec & "pack data in small endian format"
+
+        [V] ???Turn into hex and input into file???
+
+[2b]
+    TEXT:
+    - Iterate through every line ...
+        [I] Clean line: no empty, comments, spaces/tabs ... deal with pseudos, labels, and labels before instructions
+            [i] branch & j instructions need to be updated to have labels not immediates.
+
+        [II] Calculate address for each line
+            [i] branching & jumps need either signed offset or exact memory location.
+
+        [III] ???Turn into hex and input into file???
 
