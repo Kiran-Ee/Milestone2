@@ -3,7 +3,7 @@
 0] Are we just finding addresses and storing them into a file?
 1] What does "Output files should be in same directory as input file (which may/may not be same as JAR?" mean?
 2] What about "Pack data": small endian"
-3] Need help interpretting the hexadecimals values from .text (are these just hex instructions) and .data (are these memory addresses)
+3] Need help interpretting the hexadecimals values from .text (are these just hex instructions) and .data (are these memory addresses)?
 4] Illustrate example calculating "signed offet again"?
 5] Need help running through how to interpret the test file...
 6] What does "pack data in small endian format", what does pack mean?

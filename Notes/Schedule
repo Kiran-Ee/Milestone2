@@ -1,5 +1,7 @@
 ####################################################################################################
 ---:SCHEDULE:---
+] Tue - Method Descriptions
+    - 1 Day after 5:30 before 9:30.
 ] Thu - Planning
     - 1 Day
     1. Create/Adjust Schedule
@@ -8,15 +10,17 @@
 ] Fri - Design
      - 1 Day
     1. Create design document: probably just method description (pre/post conditions, arguments), helper methods*
-] Sat/Sun/Mon/Tue  - Test
-     - 4 Days
+] Sat/Sun/Mon  - Test
+     - 3 Days
     1. Write Tests Based on Design Document
         1. Test for “full” functionality (looking for all possible cases)
-] Thu/Fri/Sat/Sun/Mon - Pass Tests
-    - 5 Days
+] Thu/Fri/Sat - Pass Tests
+    - 3 Days
     1. Write Code to pass tests
     ?ASK ABOUT FUZZY GRADER: DO WE HAVE ABILITY TO TEST OUR CODE USING IT?
-] Tue - Grading
-    - 1 Days
+] Sun - Grading
+    - 1 Day
     1. Look at document again to see if missed anything
     2. Run Professor's tests cases through.
+
+... Spring break: take days if needed.
