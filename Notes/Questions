@@ -1,12 +1,36 @@
 ####################################################################################################
 ---:QUESTIONS:---
-0] Are we just finding addresses and storing them into a file?
-1] What does "Output files should be in same directory as input file (which may/may not be same as JAR?" mean?
-2] What about "Pack data": small endian"
-3] Need help interpretting the hexadecimals values from .text (are these just hex instructions) and .data (are these memory addresses)?
-4] Illustrate example calculating "signed offet again"?
-5] Need help running through how to interpret the test file...
-6] What does "pack data in small endian format", what does pack mean?
-7] How to handle "label" declarations in .text: how to encode to hex?
+1] Are we just finding addresses and storing them into a file?
+    - Take lines of data into memory hex (little endianness).
+    - Text section takes the instruction, convert to machine code, that goes into list of instructions in fake memory.
+    - Every instruciton increments it by 4 (pseudo's  do 2).
+2] What does "Output files should be in same directory as input file (which may/may not be same as JAR?" mean?
+    -
+3] What about "Pack data": small endian" ... Example "Hello World" is "H" = 11 or "0"?
+    - Big endian is how we read: Hello -> [H e l l o]
+    - Little endian: last significant character of the word is the first character
+        - [l, l, e, H ]
+        - Labels point to the beginning of the character String.
+        - Finding label address: take "start of string data address (10010000)" + # of bytes to get to the next string.
+        - The indexes in the array are also flipped
+    - Don't pack data in word aligned (don't pack data to get multiple of 4 ... packed immediately after each string)
+    - .word: DON'T HAVE TO ACCOUNT FOR THIS.
+4] Need help interpreting the hexadecimals values from .text (are these just hex instructions) and .data (are these memory addresses)?
+    - Text: same as MIPS (remove empty + comments) but with labels.
+        - The values are the instructions ... assembly it in mips to see the addressses.
+5] Illustrate example calculating "signed offset again" from label; How to handle "label" declarations in .text: how to encode to hex?
+    - Labels (could be .data or text label) ... create array of instructions ... determine if label and where the label is pointing in the array
+    - Labels point to next instructions in text not to themselves (Ex: seeing EVEN: is not the pointer, but the instruction right after it).
+    - We're going to have to update previous instructions to handle labels (beq, beq, j).
+        - J: Replace labels with absolute addressing.
+            - "Shift right 2" = dividing by 4 to convert word to binary ... shift the binary representation then replace it with hexadecimal.
+            - Once converted label to address, in word (so like j 0x00100001), send to MIPS 1.
+        - BNE, BEQ: need
+            - 1] offset = # of instructions distance from "next instruction" to the "label" ... - (label index) - (Current instruction index + 1)
+                - indexes represent word addresses; they're just the order of the instructions in the program.
+            - 2]
+    - Store text section as words (probably in another array).
+6] Do Pseudo's return a hexadecimal representation for both their sub instructions (Ex: BLT -> SLT, BNE)
+    - Word addressed.
 
 ####################################################################################################
