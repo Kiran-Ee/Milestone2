@@ -1,5 +1,22 @@
 ####################################################################################################
 ---:TODOs:---
+1] Write tests for all of your sections:
+    Kiran:
+    -	Fake_memory
+    -	Calc_data_size
+    -	Calc_next_instruction
+    -	Text_line_cleaner * (might need to give Josiah if too much work)
+    -	Calc_offset_address
+    Tanja:
+    -	Asm_to_address-in general
+    -	Asm_parser
+    -	Address_factory
+    -	Declaration_line_cleaner
+    Josiah:
+    -	LI
+    -	LA
+    -	BLT
+
 
 
 
