@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DataSectionTest {
+class CalcDataSizeTest {
     DataSection data_sec = new DataSection();
     String[] data1 = new String[]{".asciiz", "Enter your integer: "};
     String[] data2 = new String[]{".asciiz", "Your integer is EVEN!"};
