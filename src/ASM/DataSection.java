@@ -14,4 +14,9 @@ public class DataSection {
     public String calc_next_address(String prev_address, int current_size) {
         return null;
     }
+
+    public String[] declaration_line_cleaner(String line) {return null;
+    }
+    public String[] asm_parser(String asm)  {return null;
+    }
 }
