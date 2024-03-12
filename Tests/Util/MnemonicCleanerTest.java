@@ -9,7 +9,7 @@ class MnemonicCleanerTest {
 
     String[] r1_strArr = new String[]{"add", "$s1", "$s2", "$s3"};
     String r1 = "add $s1, $s2, $s3";
-    String r1_comment = "add $s1, $s2, $s3#comment";
+    String r1_comment = "add $s1, $s2, $s3#comment after instruciton";
     String r1_spacesTab = " add  $s1,$s2,     $s3     ";
     String r1_comment_with_spacesTab = " add  $s1,        $s2,     $s3     #comment";
 
