@@ -21,7 +21,6 @@ public class LiTest {
     @Test
     public void testRegularSuccess() {
         Li li = new Li(instr);
-
     }
 
     @Test
