@@ -10,7 +10,7 @@ class DeclarationLineCleanerTest {
     String labelOnly = "    label:";
     String labelData1 = " label:    .word 0x32";
     String multipleWords = "    my_label_name: .word 0x32";
-    String label_spaces_tab = " label:  .word     0x32";
+    String label_spaces_tab = " label:  .word      0x32";
     String[] dataLn1 = new String[]{"input_request", ".asciiz", "Enter your integer: "};
     String[] expected = new String[]{"label"};
     String[] labelData = new String[]{"label", ".word", "0x32"};
