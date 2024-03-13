@@ -11,7 +11,7 @@ public class TextSection {
         return null;
     }
 
-    private int calc_offset_address(String pc_plus_4, String label_address){
+    public int calc_offset_address(String pc_plus_4, String label_address){
         return -1;
     }
 }
