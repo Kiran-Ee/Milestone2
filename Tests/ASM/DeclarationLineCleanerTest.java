@@ -17,8 +17,7 @@ class DeclarationLineCleanerTest {
     String[] label_with_multiple_words = new String[]{"my_label_name", ".word", "0x32"};
     @Test
     void declaration_line_cleaner() {
-        assertArrayEquals(dataLn1, data_sec.declaration_line_cleaner(lbl1));
-    }
+        assertArrayEquals(dataLn1, data_sec.declaration_line_cleaner(lbl1));}
     @Test
     void label_only(){
         assertArrayEquals(expected, data_sec.declaration_line_cleaner(labelOnly));
