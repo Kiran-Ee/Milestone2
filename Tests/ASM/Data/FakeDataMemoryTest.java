@@ -19,9 +19,6 @@ class FakeDataMemoryTest {
     String[] dataLn5 = new String[]{"kirans_label2Char", ".asciiz", "56"};
     String[] dataLn6 = new String[]{"kirans_label3Char", ".asciiz", "7"};
     String[] dataLn7 = new String[]{"kirans_label4Char", ".asciiz", ""};
-//    String[] dataLn5 = new String[]{"kiran's_label2Word",".word", "0x0"}; // shouldn't be needed for assignment ... keeping just in case we do need it
-//    String[] dataLn6 = new String[]{"kiran's_label2Word",".word", "0x99999999"};
-//    String[] dataLn7 = new String[]{"kiran's_label2Word",".word", "-1"};
 
     String[][] d3Sec1 = new String[][]{dataLn1, dataLn2, dataLn3};
     String[][] d4Sec2 = new String[][]{dataLn4, dataLn5, dataLn6, dataLn7};
