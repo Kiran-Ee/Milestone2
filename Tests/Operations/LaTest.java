@@ -6,6 +6,8 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//(8 bits) Opcode, (4 bits) Target Register, Address( (4 bits) Index Register, (4 bits) base register, (12 bits) offset)
+
 //  lui $at, 4097 (0x1001 → upper 16 bits of $at).
 //  ori $a0,$at,disp
 public class LaTest {
