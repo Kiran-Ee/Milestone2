@@ -1,13 +1,41 @@
 package ASM.General_ASM;
 
-import ASM.DataSection;
+import ASM.GeneralASM;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class AsmToAddressTest {
-    DataSection data_sec = new DataSection();
+    GeneralASM genASM = new GeneralASM();
+    String asm_file1 =
+            ".data\n" +
+                    "Label1: .asciiz \"request\" #commentshouldn't be included       \n" +
+                    "      spaces: .asciiz    \" sp a ces\" \n\n\n" +
+                    " LotsOfLineBreaks: \"Line\"" +
+                    ".text \n" +
+                    "add $s1, $s2, $s\n" +
+                    "addiu $s1, $s2, 10 #blablabla\n" +
+                    "       addiu   $s1,$2, 0x10\n" +
+                    "addiu  $s1,$s2,                    -10\n" +
+                    "        \n" +
+                    "   \n" +
+                    "\n\n\n\n" +
+                    "#comment line" +
+                    "j RandomLabel#withacommen\n" +
+                    "add $s1, $s2, $3";
+    String exp_data_addr_arr = ""; // ... ENTER IN PROGRAM USE MARS DUMP FEATURE
+    String exp_text_addr_arr = ""; // ... ENTER IN PROGRAM USE MARS DUMP FEATURE
+    String[] exp_asm_arr = new String[]{exp_data_addr_arr, exp_text_addr_arr};
+
+    @Test
+    void emptyString() {
+        assertArrayEquals(exp_asm_arr, genASM.asm_to_address(asm_file1));
+    }
+}
+
+/*
 
     String empty = "";
     String comm = "#comment";
@@ -34,4 +62,4 @@ public class AsmToAddressTest {
     void text_section(){
         Assertions.assertEquals(text1, data_sec.asm_to_address(text));
     }
-}
+ */
