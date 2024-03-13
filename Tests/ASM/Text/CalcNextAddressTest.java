@@ -1,5 +1,6 @@
-package ASM;
+package ASM.Text;
 
+import ASM.DataSection;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

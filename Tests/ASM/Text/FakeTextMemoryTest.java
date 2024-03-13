@@ -1,4 +1,6 @@
-package ASM;
+package ASM.Text;
+
+import ASM.TextSection;
 
 class FakeTextMemoryTest {
     // Probably need to use MARS to get calculate the correct output

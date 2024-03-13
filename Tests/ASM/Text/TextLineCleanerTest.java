@@ -1,7 +1,7 @@
-package ASM;
+package ASM.Text;
 
+import ASM.TextSection;
 import org.junit.jupiter.api.Test;
-import org.w3c.dom.Text;
 
 import static org.junit.jupiter.api.Assertions.*;
 

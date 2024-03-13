@@ -1,8 +1,9 @@
-package ASM;
+package ASM.Data;
 
+import ASM.DataSection;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,7 +28,7 @@ class FakeDataMemoryTest {
 
     @Test
     void setDatad3Sec1() {
-        HashMap<String, Object[]> hm = new HashMap<>();
+        LinkedHashMap<String, Object[]> hm = new LinkedHashMap<>();
         hm.put("input_request", new Object[]{0, "10010000"});
         hm.put("even_output", new Object[]{21, "10010015"});
         hm.put("odd_output", new Object[]{43, "1001002b"});
@@ -36,7 +37,7 @@ class FakeDataMemoryTest {
 
     @Test
     void setData4Sec2() {
-        HashMap<String, Object[]> hm = new HashMap<>();
+        LinkedHashMap<String, Object[]> hm = new LinkedHashMap<>();
         hm.put("kirans_label1Char", new Object[]{0, "10010000"});
         hm.put("kirans_label2Char", new Object[]{5, "10010005"});
         hm.put("kirans_label3Char", new Object[]{8, "10010008"});
