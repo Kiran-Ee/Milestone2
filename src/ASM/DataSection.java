@@ -18,4 +18,8 @@ public class DataSection {
     public String[] declaration_line_cleaner(String line) {
         return null;
     }
+
+    public String[] data_to_little_endian(LinkedHashMap<String, String[]> dataMemory) {
+        return null;
+    }
 }

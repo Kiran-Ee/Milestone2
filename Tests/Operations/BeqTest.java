@@ -20,7 +20,7 @@ public class BeqTest {
     @Test
     public void good_variable_settings1() {
         Beq beq = new Beq(valid_instr);
-        assertEquals(beq.getInstruction()[1], valid_instr[1]);//rs
+        assertEquals(beq.getInstruction()[1], valid_instr[1]); //rs
         assertEquals(beq.getInstruction()[2], valid_instr[2]); //rt
         assertEquals(beq.getInstruction()[3], valid_instr[3]); //offset
     }
