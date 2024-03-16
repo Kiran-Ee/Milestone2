@@ -19,13 +19,13 @@ class LiTest {
     }
 
     @Test
-    public void setli1(){
+    public void setli2(){
         li li = new li(li2);
         assertArrayEquals(li2_hex_arr, li.get_hex());
     }
 
     @Test
-    public void setli1(){
+    public void setli3(){
         li li = new li(li3);
         assertArrayEquals(li3_hex_arr, li.get_hex());
     }

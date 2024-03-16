@@ -21,13 +21,13 @@ class LaTest {
     }
 
     @Test
-    public void setla1(){
+    public void setla2(){
         La la = new La(la2);
         assertArrayEquals(la2_hex_arr, la.get_hex());
     }
 
     @Test
-    public void setla1(){
+    public void setla3(){
         La la = new La(la3);
         assertArrayEquals(la3_hex_arr, la.get_hex());
     }
