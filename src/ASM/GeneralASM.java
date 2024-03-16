@@ -10,7 +10,7 @@ public class GeneralASM {
         return null;
     }
 
-    public String[] address_factory(boolean isData, String sec) {
+    public String[] cleaner_factory(boolean isData, String sec) {
         return null;
     }
 }
