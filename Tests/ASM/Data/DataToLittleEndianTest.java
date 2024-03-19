@@ -1,5 +1,6 @@
-package ASM;
+package ASM.Data;
 
+import ASM.DataSection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,18 +37,17 @@ class DataToLittleEndianTest {
             "00000037"};
 
     @BeforeEach
-        // allows each test method to use this data ... wasn't working w/o this
-    void setUp() {
+    void setUp() { // allows each test method to use this data ... wasn't working w/o this
         hm1 = new LinkedHashMap<>();
         hm1.put("input_request", new String[]{"Enter your integer: ", "10010000"});
         hm1.put("even_output", new String[]{"Your integer is EVEN!", "10010015"});
         hm1.put("odd_output", new String[]{"Your integer is ODD!", "1001002b"});
 
-        hm1 = new LinkedHashMap<>();
-        hm1.put("kirans_label1Char", new String[]{"1234", "10010000"});
-        hm1.put("kirans_label2Char", new String[]{"56", "10010005"});
-        hm1.put("kirans_label3Char", new String[]{"7", "10010008"});
-        hm1.put("kirans_label4Char", new String[]{"", "1001000a"});
+        hm2 = new LinkedHashMap<>();
+        hm2.put("kirans_label1Char", new String[]{"1234", "10010000"});
+        hm2.put("kirans_label2Char", new String[]{"56", "10010005"});
+        hm2.put("kirans_label3Char", new String[]{"7", "10010008"});
+        hm2.put("kirans_label4Char", new String[]{"", "1001000a"});
     }
 
     @Test
