@@ -17,7 +17,7 @@ public class General {
      * @return: Cleaned list of strings representing 1 part of an assembly instruction.
      * Example: “  add$s0, $a1,      $t7 #ignore" ->  ["add","$s0","$a1","t7"]
      */
-    String[] mnemonic_cleaner(String mnemonic) {
+    public static String[] mnemonic_cleaner(String mnemonic) {
         ArrayList<String> cleaned_instr_AL = new ArrayList<>(); // for dynamically adding
         int index_last_index = find_last_index(mnemonic); // last valid index of assembly instruction
         int index_start_char = find_non_space(0, mnemonic); // pointer for beginning of current instruction
@@ -64,7 +64,7 @@ public class General {
         @return:
             returns the start index if no space found
      */
-    private int find_non_space(int start, String str) {
+    public static int find_non_space(int start, String str) {
         int index_non_space = -1;
         for (int i = start; i < str.length(); i++) {
             char s = str.charAt(i);
@@ -86,7 +86,7 @@ public class General {
        @return:
            returns the start index if no space found
     */
-    private int find_last_index(String str) {
+    private static int find_last_index(String str) {
         int index_start = str.length() - 1;
         int index_comment = str.indexOf("#");
         int index_last_index = -1;

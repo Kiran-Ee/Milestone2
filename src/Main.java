@@ -11,8 +11,20 @@ public class Main {
 //        General general = new General();
 //        System.out.println(general.instruction_to_hex(args[0]));
 //        System.out.println(); // newline for requirements
+        String str1 = "    ";  // Only contains spaces
+        String str2 = "\t\t\t"; // Only contains tabs
+        String str3 = "  \t  "; // Contains both spaces and tabs
+        String str4 = "Hello";  // Contains non-whitespace characters
 
-        // Creating an array of objects to store ints and strings
-        System.out.println("    String asm = .datan;\n testing for line numbers \n hopefully that just worked");
+        System.out.println(isJustWhiteSpace(str1)); // true
+        System.out.println(isJustWhiteSpace(str2)); // true
+        System.out.println(isJustWhiteSpace(str3)); // true
+        System.out.println(isJustWhiteSpace(str4)); // false
     }
+
+    public static boolean isJustWhiteSpace(String str) {
+        // Trim removes leading and trailing whitespace
+        // If the resulting string is empty, then it contains only whitespace
+        return str.trim().isEmpty();
+        }
 }

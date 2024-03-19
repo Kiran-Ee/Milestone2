@@ -35,8 +35,8 @@ class TextLineCleanerTest {
     String[] j1_strArr = new String[]{"j", "JumpLabel"};
     String j1 = "j JumpLabel";
     String j1_comment = "j JumpLabel#comment";
-    String j1_spacesTab = " j      JumpLable     ";
-    String j1_comment_with_spacesTab = " j      JumpLable          #comment";
+    String j1_spacesTab = " j      JumpLabel     ";
+    String j1_comment_with_spacesTab = " j      JumpLabel          #comment";
 
     String[] bne1_strArr = new String[]{"bne", "$t0", "$zero", "ITS_EVEN"};
     String bne1 = "bne $t0, $zero, ITS_EVEN";
@@ -51,12 +51,12 @@ class TextLineCleanerTest {
     String beq1_comment_with_spacesTab = "  beq    $t0,$zero,     ITS_EVEN    #comment";
 
     // Empty/Comment lines
-    String[] empty1_strArr = new String[]{""};
+    String[] empty1_strArr = new String[]{};
     String empty1 = "";
     String empty2 = " ";
     String empty3 = "    ";
 
-    String[] comment1_strArr = new String[]{""};
+    String[] comment1_strArr = new String[]{};
     String comment1 = "#";
     String comment2 = " #comment";
     String comment3 = "    #randomline but multiple words with #$,:.-[q           ";
