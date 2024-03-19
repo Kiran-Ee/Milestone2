@@ -7,16 +7,16 @@
     1. Create/Adjust Schedule
     2. Set up repo
     3. Take notes on requirements
-] Fri/Sat/Sun/Mon  - Test
-     - 4 Days
+] Sat./Sun.  - Test
+     - 2 Days
     1. Write Tests Based on Design Document
         1. Test for “full” functionality (looking for all possible cases)
-] Thu/Fri/Sat - Pass Tests
-    - 3 Days
+] Mon./Tue./Wed./Thu. - Pass Tests
+    - 4 Days ... tentative Tuesday 6 o'clock
     1. Write Code to pass tests
-] Sun - Grading
+] Fri./Sat.: Write New Tests
+    - 2 Days
+] Sun./Mon.:  - Grading
     - 1 Day
     1. Look at document again to see if missed anything
     2. Run Professor's tests cases through.
-
-... Spring break: take days if needed.

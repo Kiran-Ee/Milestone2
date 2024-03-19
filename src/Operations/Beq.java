@@ -32,7 +32,8 @@ public class Beq implements Operation{
 
         return com_hex;
     }
-    public String[] getInstruction(){
+
+    public String[] getInstruction(){ // used to check constructor
         String[] ins = {BEQ, rs, rt, offset};
         return ins;
     }
