@@ -95,21 +95,21 @@ class TextLineCleanerTest {
     String la_neg_spacesTab = " la    $s1,-ITS_ODD     ";
     String la_neg_comment_with_spacesTab = " la    $s1,-ITS_ODD     #comment";
 
-    String[] blt_strArr = new String[]{"blt", "$at", "$s3,", "branchtime"};
-    String[] blt_hex_strArr = new String[]{"blt", "$at", "0xbranchtime"};
-    String[] blt_neg_strArr = new String[]{"blt", "$at", "-branchtime"};
+    String[] blt_strArr = new String[]{"blt", "$at", "$s3", "branchtime"};
+    String[] blt_hex_strArr = new String[]{"blt", "$at", "$5", "0xbranchtime"};
+    String[] blt_neg_strArr = new String[]{"blt", "$at", "$0", "-branchtime"};
     String blt = "blt, $at, $s3, branchtime";
     String blt_comment = "blt, $at, $s3,  branchtime#comment";
     String blt_spacesTab = " blt, $at,$s3,          branchtime     ";
     String blt_comment_with_spacesTab = " blt, $at,$s3,          branchtime     #comment";
-    String blt_hex = "blt, $at, 0xbranchtime";
-    String blt_hex_comment = "blt, $at, 0xbranchtime#comment";
-    String blt_hex_spacesTab = " blt, $at,0xbranchtime     ";
-    String blt_hex_comment_with_spacesTab = " blt,$at,0xbranchtime     #comment";
-    String blt_neg = "blt, $at, -branchtime";
-    String blt_neg_comment = "blt, $at, -branchtime#comment";
-    String blt_neg_spacesTab = " blt,   $at,-branchtime     ";
-    String blt_neg_comment_with_spacesTab = " blt,   $at,-branchtime     #comment";
+    String blt_hex = "blt, $at, $5 0xbranchtime";
+    String blt_hex_comment = "blt, $at,$5 0xbranchtime#comment";
+    String blt_hex_spacesTab = " blt, $at,$5 0xbranchtime     ";
+    String blt_hex_comment_with_spacesTab = " blt,$at, $5 0xbranchtime     #comment";
+    String blt_neg = "blt, $at,$0 -branchtime";
+    String blt_neg_comment = "blt, $at, $0 -branchtime#comment";
+    String blt_neg_spacesTab = " blt,   $at,$0 -branchtime     ";
+    String blt_neg_comment_with_spacesTab = " blt,   $at, $0 -branchtime     #comment";
 
     // r
     @Test

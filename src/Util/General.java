@@ -22,6 +22,43 @@ public class General {
         int index_last_index = find_last_index(mnemonic); // last valid index of assembly instruction
         int index_start_char = find_non_space(0, mnemonic); // pointer for beginning of current instruction
         int index_end_char = -1; // pointer for end of current instruction
+
+        while (index_start_char <= index_last_index) { // stop when reached last index
+            int[] try_end_vals = new int[5];
+            try_end_vals[0] = mnemonic.indexOf("$", index_start_char + 1);
+            try_end_vals[1] = mnemonic.indexOf(",", index_start_char + 1);
+            try_end_vals[2] = mnemonic.indexOf(" ", index_start_char + 1);
+            try_end_vals[3] = mnemonic.indexOf(")", index_start_char + 1);
+            try_end_vals[4] = mnemonic.indexOf("(", index_start_char);
+            index_end_char = index_last_index + 1; // assuming last index is min unless proven o.w.
+
+            if (try_end_vals[4] == index_start_char){ // handling offset: final term
+                index_start_char = try_end_vals[4] + 1; // "(" + 1
+                index_end_char =  try_end_vals[3]; // ")"
+            } else{
+                for(int i: try_end_vals){
+                    if(i == -1) continue;
+                    index_end_char = Math.min(index_end_char, i);
+                }
+            }
+
+            String op = mnemonic.substring(index_start_char, index_end_char);
+            cleaned_instr_AL.add(op);
+
+            index_start_char = find_non_space(index_end_char + 1, mnemonic); // advancing to next "non-space" char
+        }
+
+        // Converting ArrayList<String> -> String[]
+        String[] cleaned_instr = new String[cleaned_instr_AL.size()];
+        cleaned_instr = cleaned_instr_AL.toArray(cleaned_instr);
+        return cleaned_instr;
+    }
+    /* BACKUP
+     public static String[] mnemonic_cleaner(String mnemonic) {
+        ArrayList<String> cleaned_instr_AL = new ArrayList<>(); // for dynamically adding
+        int index_last_index = find_last_index(mnemonic); // last valid index of assembly instruction
+        int index_start_char = find_non_space(0, mnemonic); // pointer for beginning of current instruction
+        int index_end_char = -1; // pointer for end of current instruction
         int index_comma = -1;
         int index_dollar_sign = mnemonic.indexOf("$"); // determines if "j" or not: I think all instructions except "j" have "$"
         int index_paren = -1;
@@ -54,6 +91,7 @@ public class General {
         cleaned_instr = cleaned_instr_AL.toArray(cleaned_instr);
         return cleaned_instr;
     }
+     */
 
 
     /*
@@ -378,24 +416,6 @@ public class General {
             hex = "0" + hex; //IF IT'S NEGATIVE (signed) THEN THIS MIGHT NEED TO BE F?
         }
         return hex;
-    }
-
-
-    /**
-     * Used by any operation with an offset and register format. Ex: 50($t)
-     *
-     * @param address: String representing a base & offset.
-     * @return String array: [0]:base [1]:offset
-     */
-    public static String[] offset_parser(String address) {
-        if (!(address instanceof String))
-            throw new IllegalArgumentException("Can't send in not String to offset_parser");
-
-        String offset = address.substring(0, address.indexOf('('));
-        String base = address.substring(address.indexOf('(') + 1, address.indexOf(')'));
-
-        String[] s = new String[]{base, offset};
-        return s; // returns [base, offset]
     }
 } //end: General Class
 
