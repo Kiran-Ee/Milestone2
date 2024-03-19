@@ -59,7 +59,7 @@ class TextLineCleanerTest {
     String[] comment1_strArr = new String[]{""};
     String comment1 = "#";
     String comment2 = " #comment";
-    String comment3 = "    #randomline but multiple words with $,:.-[q           ";
+    String comment3 = "    #randomline but multiple words with #$,:.-[q           ";
 
 
     // Pseodos

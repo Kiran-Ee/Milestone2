@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CalcNextAddressTest {
     DataSection data_sec = new DataSection();
-    String[] dataLn1 = new String[]{"10010000", "21", "Enter your integer: "}; //format: start addr, numChar, data.
+    String[] dataLn1 = new String[]{"10010000", "21", "Enter your integer: "}; //format: start addr, numChar, data ... 3rd element is just for reference
     String[] dataLn2 = new String[]{"10010015", "22", "Your integer is EVEN!"};
     String[] dataLn3 = new String[]{"1001002b", "21", "Your integer is ODD!"};
 
@@ -15,6 +15,9 @@ class CalcNextAddressTest {
     String[] dataLn5 = new String[]{"10010005", "3", "56"};
     String[] dataLn6 = new String[]{"10010008", "2", "7"};
     String[] dataLn7 = new String[]{"1001000a", "1", ""};
+
+    String[] dataLnWrong = new String[]{"1001000a", "-1", ""};
+
 
 
     @Test

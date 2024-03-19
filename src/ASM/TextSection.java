@@ -3,7 +3,7 @@ package ASM;
 import java.util.LinkedHashMap; // like hash but maintains ordering + allows us to immediately find labels
 
 public class TextSection {
-    public LinkedHashMap<String, String[]> fake_text_memory(String[][] cleaned_data_sec) {
+    public LinkedHashMap<String, String[][]> fake_text_memory(String[][] cleaned_data_sec) {
         return null;
     }
 
@@ -15,7 +15,7 @@ public class TextSection {
         return -1;
     }
 
-    public String[] text_to_hex_instructions(LinkedHashMap<String, String[]> dataMemory, LinkedHashMap<String, String[]> textMemory) {
+    public String[] text_to_hex_instructions(LinkedHashMap<String, String[]> dataMemory, LinkedHashMap<String, String[][]> textMemory) {
         return null;
     }
 }

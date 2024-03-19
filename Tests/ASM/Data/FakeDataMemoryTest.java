@@ -10,35 +10,36 @@ import static org.junit.Assert.assertEquals;
 // will probs add more tests later but this is a good start ...
 // also, we might change the data structure entirely.
 class FakeDataMemoryTest {
-    DataSection data_sec = new DataSection();
-    String[] dataLn1 = new String[]{"input_request", ".asciiz", "Enter your integer: "};
-    String[] dataLn2 = new String[]{"even_output", ".asciiz", "Your integer is EVEN!"};
-    String[] dataLn3 = new String[]{"odd_output", ".asciiz", "Your integer is ODD!"};
+    DataSection data_obj = new DataSection();
+    String[] dataLn1 = new String[]{"input_request", "Enter your integer: "};
+    String[] dataLn2 = new String[]{"even_output", "Your integer is EVEN!"};
+    String[] dataLn3 = new String[]{"odd_output", "Your integer is ODD!"};
+    String[][] clean_data_sec_size3 = new String[][]{dataLn1, dataLn2, dataLn3};
 
-    String[] dataLn4 = new String[]{"kirans_label1Char", ".asciiz", "1234"};
-    String[] dataLn5 = new String[]{"kirans_label2Char", ".asciiz", "56"};
-    String[] dataLn6 = new String[]{"kirans_label3Char", ".asciiz", "7"};
-    String[] dataLn7 = new String[]{"kirans_label4Char", ".asciiz", ""};
-
-    String[][] d3Sec1 = new String[][]{dataLn1, dataLn2, dataLn3};
-    String[][] d4Sec2 = new String[][]{dataLn4, dataLn5, dataLn6, dataLn7};
+    String[] dataLn4 = new String[]{"kirans_label1Char", "1234"};
+    String[] dataLn5 = new String[]{"kirans_label2Char", "56"};
+    String[] dataLn6 = new String[]{"kirans_label3Char", "7"};
+    String[] dataLn7 = new String[]{"kirans_label4Char", ""};
+    String[][] clean_data_sec_size4 = new String[][]{dataLn4, dataLn5, dataLn6, dataLn7};
 
     @Test
-    void setDatad3Sec1() {
-        LinkedHashMap<String, Object[]> hm = new LinkedHashMap<>();
-        hm.put("input_request", new Object[]{0, "10010000"});
-        hm.put("even_output", new Object[]{21, "10010015"});
-        hm.put("odd_output", new Object[]{43, "1001002b"});
-        assertEquals(hm, data_sec.fake_data_memory(d3Sec1));
+    void set_clean_data_sec_size3() {
+        LinkedHashMap<String, String[]> hm = new LinkedHashMap<>();
+        hm.put("input_request", new String[]{"Enter your integer: ", "10010000"});
+        hm.put("even_output", new String[]{"Your integer is EVEN!", "10010015"});
+        hm.put("odd_output", new String[]{"Your integer is ODD!", "1001002b"});
+
+        assertEquals(hm, data_obj.fake_data_memory(clean_data_sec_size3));
     }
 
     @Test
-    void setData4Sec2() {
-        LinkedHashMap<String, Object[]> hm = new LinkedHashMap<>();
-        hm.put("kirans_label1Char", new Object[]{0, "10010000"});
-        hm.put("kirans_label2Char", new Object[]{5, "10010005"});
-        hm.put("kirans_label3Char", new Object[]{8, "10010008"});
-        hm.put("kirans_label4Char", new Object[]{11, "1001000b"});
-        assertEquals(hm, data_sec.fake_data_memory(d4Sec2));
+    void set_clean_data_sec_size4() {
+        LinkedHashMap<String, String[]> hm = new LinkedHashMap<>();
+        hm.put("kirans_label1Char", new String[]{"1234", "10010000"});
+        hm.put("kirans_label2Char", new String[]{"56", "10010005"});
+        hm.put("kirans_label3Char", new String[]{"7", "10010008"});
+        hm.put("kirans_label4Char", new String[]{"", "1001000b"});
+
+        assertEquals(hm, data_obj.fake_data_memory(clean_data_sec_size4));
     }
 }
