@@ -54,10 +54,10 @@ class MnemonicCleanerTest {
     String[] prof3_strArr = new String[]{"andi", "$zero", "$ra", "9"};
     String prof3 = " andi $zero, $ra, 9";
 
-    String[] prof4_strArr = new String[]{"sw", "$v0", "($a1)"};
+    String[] prof4_strArr = new String[]{"sw", "$v0", "$a1"};
     String prof4 = "sw $v0, ($a1)# Comment";
 
-    String[] prof5_strArr = new String[]{"sw", "$v0", "0x($a1)"};
+    String[] prof5_strArr = new String[]{"sw", "$v0", "0x", "$a1"};
     String prof5 = "sw $v0, 0x($a1)# Comment";
 
 
@@ -226,17 +226,18 @@ class MnemonicCleanerTest {
         assertArrayEquals(prof5_strArr, gen.mnemonic_cleaner(prof5)); //when last character is the last index.
     }
 
-    // TESTING FOR "text_line_cleaner()" ... WILL ALWAYS FAIL ON PURPOSE! THE ":" IS HANDLED IN THAT METHOD
-    @Test
-    void return_label() {
-        assertArrayEquals(asm_label_strArr, gen.mnemonic_cleaner(asm_label));
-    }
-    @Test
-    void return_label_comment1() {
-        assertArrayEquals(asm_label_comment1_strArr, gen.mnemonic_cleaner(asm_label_comment1));
-    }
-    @Test
-    void return_label_comment2() {
-        assertArrayEquals(asm_label_comment2_strArr, gen.mnemonic_cleaner(asm_label_comment2));
-    }
+
+//    // TESTING FOR "text_line_cleaner()" ... WILL ALWAYS FAIL ON PURPOSE! THE ":" IS HANDLED IN THAT METHOD
+//    @Test
+//    void return_label() {
+//        assertArrayEquals(asm_label_strArr, gen.mnemonic_cleaner(asm_label));
+//    }
+//    @Test
+//    void return_label_comment1() {
+//        assertArrayEquals(asm_label_comment1_strArr, gen.mnemonic_cleaner(asm_label_comment1));
+//    }
+//    @Test
+//    void return_label_comment2() {
+//        assertArrayEquals(asm_label_comment2_strArr, gen.mnemonic_cleaner(asm_label_comment2));
+//    }
 }

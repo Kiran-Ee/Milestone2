@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SwTest {
-    String[] valid_instr = {"sw", "$t0", "100($s1)"}; //Format: sw,rt, offset(base)
-    String[] valid_instr1 = {"sw", "$a0", "5($t3)"};
-    String[] valid_instr2 = {"sw", "$zero", "5($a0)"};
+    String[] valid_instr = {"sw", "$t0", "100","$s1"}; //Format: sw,rt, offset(base)
+    String[] valid_instr1 = {"sw", "$a0", "5", "$t3"};
+    String[] valid_instr2 = {"sw", "$zero", "5", "$a0"};
 
-    String[] instr_hex = {"sw", "$v0", "0xA($s4)"};
-    String[] instr_neg = {"sw", "$v1", "-99($t4)"};
+    String[] instr_hex = {"sw", "$v0", "0xA", "$s4"};
+    String[] instr_neg = {"sw", "$v1", "-99","$t4"};
 
     @Test
     public void good_variable_setting()

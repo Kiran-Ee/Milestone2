@@ -1,5 +1,7 @@
 package Operations;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 // Josiah
@@ -14,19 +16,19 @@ class LiTest {
 
     @Test
     public void setli1(){
-        li li = new li(li1);
+        Li li = new Li(li1);
         assertArrayEquals(li1_hex_arr, li.get_hex());
     }
 
     @Test
     public void setli2(){
-        li li = new li(li2);
+        Li li = new Li(li2);
         assertArrayEquals(li2_hex_arr, li.get_hex());
     }
 
     @Test
     public void setli3(){
-        li li = new li(li3);
+        Li li = new Li(li3);
         assertArrayEquals(li3_hex_arr, li.get_hex());
     }
 }

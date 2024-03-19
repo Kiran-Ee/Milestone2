@@ -1,5 +1,7 @@
 package Operations;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BltTest {
@@ -15,24 +17,24 @@ class BltTest {
 
     @Test
     public void setblt1(){
-        blt blt = new blt(blt1);
+        Blt blt = new Blt(blt1);
         assertArrayEquals(blt1_hex_arr, blt.get_hex());
     }
 
     @Test
     public void setblt2(){
-        blt blt = new blt(blt2);
+        Blt blt = new Blt(blt2);
         assertArrayEquals(blt2_hex_arr, blt.get_hex());
     }
 
     @Test
     public void setblt3(){
-        blt blt = new blt(blt3);
+        Blt blt = new Blt(blt3);
         assertArrayEquals(blt3_hex_arr, blt.get_hex());
     }
     @Test
     public void setblt4(){
-        blt blt = new blt(blt4);
+        Blt blt = new Blt(blt4);
         assertArrayEquals(blt4_hex_arr, blt.get_hex());
     }
 }
