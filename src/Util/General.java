@@ -373,7 +373,7 @@ public class General {
      */
     public static String pad_hex(String hex, int padding) {
         while (hex.length() < padding) { // padding
-            hex = "0" + hex; //IF IT'S NEGATIVE (signed) THEN THIS MIGHT NEED TO BE F?
+            hex = "0" + hex;
         }
         return hex;
     }

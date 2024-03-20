@@ -12,16 +12,22 @@ public class TextSection {
 
         for (String[] instr : cleaned_text_sec) {
             String counter_str = "" + counter;
-            if (instr[0].contains(":")) { // label
+
+            if (instr[0].contains(":"))  // label
+            {
                 cur_addr = DataSection.calc_next_address(cur_addr, 4);
+                cur_addr = General.pad_hex(cur_addr, 8); // padding 0's bc "00" gets removed
                 lhm.put(instr[0], new String[][]{new String[]{counter_str}, new String[]{cur_addr}});
-            } else { // non-label
+            }
+            else
+            {
                 lhm.put(counter_str, new String[][]{instr, new String[]{cur_addr}});
                 cur_addr = DataSection.calc_next_address(cur_addr, 4);
+                cur_addr = General.pad_hex(cur_addr, 8);
             }
             counter++;
         }
-        return null;
+        return lhm;
     }
 
     public String[] text_line_cleaner(String line) {
