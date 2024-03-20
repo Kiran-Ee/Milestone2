@@ -50,6 +50,12 @@ class TextLineCleanerTest {
     String beq1_spacesTab = " beq    $t0,$zero,     ITS_EVEN";
     String beq1_comment_with_spacesTab = "  beq    $t0,$zero,     ITS_EVEN    #comment";
 
+    String[] lbl1_strArr = new String[]{"label:"};
+    String lbl1 = "label:";
+    String lbl1_comment = "label:#comment";
+    String lbl1_spacesTab = " label:    ";
+    String lbl1_comment_with_spacesTab = " label:   #comment ";
+
     // Empty/Comment lines
     String[] empty1_strArr = new String[]{};
     String empty1 = "";
@@ -60,7 +66,6 @@ class TextLineCleanerTest {
     String comment1 = "#";
     String comment2 = " #comment";
     String comment3 = "    #randomline but multiple words with #$,:.-[q           ";
-
 
     // Pseodos
     String[] li_strArr = new String[]{"li", "$s1", "10"};
@@ -256,6 +261,27 @@ class TextLineCleanerTest {
         assertArrayEquals(beq1_strArr, text_sec.text_line_cleaner(beq1_comment_with_spacesTab));
     }
 
+    @Test
+    void setLbl1() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1));
+    }
+
+    @Test
+    void setLbl1_comment() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1_comment));
+    }
+
+    @Test
+    void setLbl1_spacesTab() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1_spacesTab));
+    }
+
+    @Test
+    void setLbl1_comment_with_spacesTab() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1_comment_with_spacesTab));
+    }
+
+
     // Empty
     @Test
     void setEmpty1() {
@@ -289,7 +315,6 @@ class TextLineCleanerTest {
     }
 
     // Pseudos
-    // i=li
     @Test
     void setLi1() {
         assertArrayEquals(li_strArr, text_sec.text_line_cleaner(li));

@@ -5,7 +5,22 @@ import java.util.LinkedHashMap; // like hash but maintains ordering + allows us 
 import Util.General;
 
 public class TextSection {
-    public LinkedHashMap<String, String[][]> fake_text_memory(String[][] cleaned_data_sec) {
+    public LinkedHashMap<String, String[][]> fake_text_memory(String[][] cleaned_text_sec) { // {“index or label” : [[“instruction”], [“address in memory”]] }
+        int counter = 0;
+        String cur_addr = "00400000";
+        LinkedHashMap<String, String[][]> lhm = new LinkedHashMap<>();
+
+        for (String[] instr : cleaned_text_sec) {
+            String counter_str = "" + counter;
+            if (instr[0].contains(":")) { // label
+                cur_addr = DataSection.calc_next_address(cur_addr, 4);
+                lhm.put(instr[0], new String[][]{new String[]{counter_str}, new String[]{cur_addr}});
+            } else { // non-label
+                lhm.put(counter_str, new String[][]{instr, new String[]{cur_addr}});
+                cur_addr = DataSection.calc_next_address(cur_addr, 4);
+            }
+            counter++;
+        }
         return null;
     }
 
@@ -20,12 +35,7 @@ public class TextSection {
             return new String[]{};
         }
 
-        String[] cleaned_line = General.mnemonic_cleaner(line);
-        if (cleaned_line[0].contains(":")) { // for labels
-            String s = cleaned_line[0];
-            cleaned_line[0] = s.substring(0, s.indexOf(":"));
-        }
-        return cleaned_line;
+        return General.mnemonic_cleaner(line);
     }
 
     public int calc_offset_address(String pc_plus_4, String label_address) {

@@ -14,7 +14,7 @@ class FakeTextMemoryTest {
 
     String[] text_ln1 = new String[]{"add", "$1", "$1","$1"};
     String[] text_ln2 = new String[]{"sub", "$1", "$1", "$1"};
-    String[] text_ln3 = new String[]{"ITS_ODD"};
+    String[] text_ln3 = new String[]{"ITS_ODD:"};
     String[] text_ln4 = new String[]{"j", "ITS_ODD"};
     String[] text_ln5 = new String[]{"beq", "$a0", "$zero", "ITS_ODD"};
     String[] text_ln6 = new String[]{"add", "$t2", "$v1", "$a0"};
@@ -26,7 +26,7 @@ class FakeTextMemoryTest {
         LinkedHashMap<String, String[][]> hm = new LinkedHashMap<>();
         hm.put("1", new String[][]{text_ln2, new String[]{"00400000"}});
         hm.put("0", new String[][]{text_ln1, new String[]{"00400004"}});
-        hm.put("ITS_ODD", new String[][]{text_ln3, new String[]{"00400008"}});
+        hm.put("ITS_ODD:", new String[][]{new String[]{"2"}, new String[]{"0040000c"}});
         hm.put("3", new String[][]{text_ln4, new String[]{"0040000c"}});
         hm.put("4", new String[][]{text_ln5, new String[]{"00400010"}});
         hm.put("5", new String[][]{text_ln6, new String[]{"00400014"}});
