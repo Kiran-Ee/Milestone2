@@ -4,14 +4,30 @@ import java.util.LinkedHashMap; // like hash but maintains ordering + allows us 
 
 public class DataSection {
     public LinkedHashMap<String, String[]> fake_data_memory(String[][] cleaned_data_sec) {
-        return null;
+        LinkedHashMap<String, String[]> lhm = new LinkedHashMap<>();
+        String prev_addr = "10010000";
+        for(String[] instr: cleaned_data_sec){
+            String label = instr[0];
+            String data_val = instr[1];
+
+            int cur_size = calc_data_size(".asciiz", data_val);
+            String address = calc_next_address(prev_addr, cur_size);
+
+            lhm.put(label, new String[]{data_val, address});
+        }
+        return lhm;
     }
 
     public int calc_data_size(String data_type, String data) {
-        return -1;
+        if (data_type.equals(".asciiz")){ // no .word for this assignment ...
+            return data.length() + 1;
+        } else{
+            return 4;
+        }
     }
 
     public String calc_next_address(String prev_address, int current_size) {
+
         return null;
     }
 
