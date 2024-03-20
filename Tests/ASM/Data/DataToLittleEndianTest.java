@@ -39,7 +39,7 @@ class DataToLittleEndianTest {
     @BeforeEach
     void setUp() { // allows each test method to use this data ... wasn't working w/o this
         hm1 = new LinkedHashMap<>();
-        hm1.put("input_request", new String[]{"Enter your integer: ", "10010000"});
+        hm1.put("input_request", new String[]{"Enter your integer: ", "10010000"}); // {label: ["DataValue", "Memory Address"]}
         hm1.put("even_output", new String[]{"Your integer is EVEN!", "10010015"});
         hm1.put("odd_output", new String[]{"Your integer is ODD!", "1001002b"});
 
