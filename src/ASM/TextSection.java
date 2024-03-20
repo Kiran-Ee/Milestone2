@@ -13,14 +13,12 @@ public class TextSection {
         for (String[] instr : cleaned_text_sec) {
             String counter_str = "" + counter;
 
-            if (instr[0].contains(":"))  // label
-            {
+            if (instr[0].contains(":"))  { // label
                 cur_addr = DataSection.calc_next_address(cur_addr, 4);
                 cur_addr = General.pad_hex(cur_addr, 8); // padding 0's bc "00" gets removed
                 lhm.put(instr[0], new String[][]{new String[]{counter_str}, new String[]{cur_addr}});
             }
-            else
-            {
+            else {
                 lhm.put(counter_str, new String[][]{instr, new String[]{cur_addr}});
                 cur_addr = DataSection.calc_next_address(cur_addr, 4);
                 cur_addr = General.pad_hex(cur_addr, 8);
@@ -44,11 +42,15 @@ public class TextSection {
         return General.mnemonic_cleaner(line);
     }
 
-    public int calc_offset_address(String pc_plus_4, String label_address) {
-        return -1;
+    public String[] text_to_hex_instructions(LinkedHashMap<String, String[]> dataMemory, LinkedHashMap<String, String[][]> textMemory) {
+
+        return null;
     }
 
-    public String[] text_to_hex_instructions(LinkedHashMap<String, String[]> dataMemory, LinkedHashMap<String, String[][]> textMemory) {
-        return null;
+    public int calc_offset(String pc, String label_address) {
+        int pc_plus_4_int = Integer.parseInt(pc) + 1; // "4 bytes" = "1 word"
+        int lbl_int = Integer.parseInt(label_address);
+        if (pc_plus_4_int <0 || lbl_int<0) throw new IllegalArgumentException("calc_offset: not possible to send negative index ...");
+        return lbl_int - pc_plus_4_int;
     }
 }

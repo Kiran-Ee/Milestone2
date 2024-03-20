@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CalcOffsetAddressTest {
+class CalcOffsetTest {
     TextSection text_sec = new TextSection();
     String bad_cur_empty = "";
     String bad_cur_neg = "-1";
@@ -16,6 +16,7 @@ class CalcOffsetAddressTest {
     String bad_lbl_double = "1.5";
     String bad_lbl_hex = "0x1";
 
+    String cur0 = "0";
     String cur1 = "1";
     String cur2 = "100";
     String cur3 = "999999";
@@ -27,35 +28,40 @@ class CalcOffsetAddressTest {
     @Test
     public void setBad_cur_empty(){
         assertThrows(IllegalArgumentException.class, () -> {
-            text_sec.calc_offset_address(bad_cur_empty, bad_lbl_empty);});
+            text_sec.calc_offset(bad_cur_empty, bad_lbl_empty);});
     }
     @Test
     public void setBad_cur_neg(){
         assertThrows(IllegalArgumentException.class, () -> {
-            text_sec.calc_offset_address(bad_cur_neg, bad_lbl_neg);});
+            text_sec.calc_offset(bad_cur_neg, bad_lbl_neg);});
     }
     @Test
     public void setBad_cur_double(){
         assertThrows(IllegalArgumentException.class, () -> {
-            text_sec.calc_offset_address(bad_cur_double, bad_lbl_double);});
+            text_sec.calc_offset(bad_cur_double, bad_lbl_double);});
     }
     @Test
     public void setBad_cur_hex(){
         assertThrows(IllegalArgumentException.class, () -> {
-            text_sec.calc_offset_address(bad_cur_hex, bad_lbl_hex);});
+            text_sec.calc_offset(bad_cur_hex, bad_lbl_hex);});
     }
+
     // Testing valid returns
     @Test
-    public void setCur1(){
-       assertEquals(0, text_sec.calc_offset_address(cur1,lbl1)); // same
+    public void set_0_return(){
+        assertEquals(0, text_sec.calc_offset(cur0,lbl1));
     }
     @Test
-    public void setCur2(){
-        assertEquals(0, text_sec.calc_offset_address(cur2,lbl2)); // current after lbl
+    public void set_same_curLbl(){
+       assertEquals(-1, text_sec.calc_offset(cur1,lbl1));
     }
     @Test
-    public void setCur3(){
-        assertEquals(0, text_sec.calc_offset_address(cur3,lbl3)); // current before lbl
+    public void set_cur_after_lbl(){
+        assertEquals(-51, text_sec.calc_offset(cur2,lbl2));
+    }
+    @Test
+    public void set_cur_before_lbl(){
+        assertEquals(0, text_sec.calc_offset(cur3,lbl3));
     }
 
 }
