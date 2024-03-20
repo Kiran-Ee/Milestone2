@@ -7,15 +7,15 @@ import java.util.List;
 public class DataSection {
     public LinkedHashMap<String, String[]> fake_data_memory(String[][] cleaned_data_sec) {
         LinkedHashMap<String, String[]> lhm = new LinkedHashMap<>();
-        String prev_addr = "10010000";
+        String cur_address = "10010000";
         for(String[] instr: cleaned_data_sec){
             String label = instr[0];
             String data_val = instr[1];
-
             int cur_size = calc_data_size(".asciiz", data_val);
-            String address = calc_next_address(prev_addr, cur_size);
 
-            lhm.put(label, new String[]{data_val, address});
+            lhm.put(label, new String[]{data_val, cur_address});
+
+            cur_address = calc_next_address(cur_address, cur_size);
         }
         return lhm;
     }

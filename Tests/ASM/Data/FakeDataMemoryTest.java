@@ -3,9 +3,13 @@ package ASM.Data;
 import ASM.DataSection;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 // will probs add more tests later but this is a good start ...
 // also, we might change the data structure entirely.
@@ -29,7 +33,17 @@ class FakeDataMemoryTest {
         hm.put("even_output", new String[]{"Your integer is EVEN!", "10010015"});
         hm.put("odd_output", new String[]{"Your integer is ODD!", "1001002b"});
 
-        assertEquals(hm, data_obj.fake_data_memory(clean_data_sec_size3));
+        LinkedHashMap<String, String[]> actual_hm = data_obj.fake_data_memory(clean_data_sec_size3);
+
+        Set<Map.Entry<String, String[]>> hm_entrySet = hm.entrySet();
+        assertEquals(hm.keySet(), actual_hm.keySet()); // checking keys
+
+        for(Map.Entry<String, String[]> e : hm_entrySet) {
+            String key = e.getKey();
+            String[] array1 = e.getValue();
+            String[] array2 = actual_hm.get(key);
+            assertTrue(Arrays.equals(array1, array2), "The arrays for key " + key + " are not equal.");  // checking vals
+        }
     }
 
     @Test
@@ -38,8 +52,18 @@ class FakeDataMemoryTest {
         hm.put("kirans_label1Char", new String[]{"1234", "10010000"});
         hm.put("kirans_label2Char", new String[]{"56", "10010005"});
         hm.put("kirans_label3Char", new String[]{"7", "10010008"});
-        hm.put("kirans_label4Char", new String[]{"", "1001000b"});
+        hm.put("kirans_label4Char", new String[]{"", "1001000a"});
 
-        assertEquals(hm, data_obj.fake_data_memory(clean_data_sec_size4));
+        LinkedHashMap<String, String[]> actual_hm = data_obj.fake_data_memory(clean_data_sec_size4);
+
+        Set<Map.Entry<String, String[]>> hm_entrySet = hm.entrySet();
+        assertEquals(hm.keySet(), actual_hm.keySet()); // checking keys
+
+        for(Map.Entry<String, String[]> e : hm_entrySet) {
+            String key = e.getKey();
+            String[] array1 = e.getValue();
+            String[] array2 = actual_hm.get(key);
+            assertTrue(Arrays.equals(array1, array2), "The arrays for key " + key + " are not equal.");  // checking vals
+        }
     }
 }
