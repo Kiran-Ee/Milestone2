@@ -32,12 +32,12 @@ public class General {
             try_end_vals[4] = mnemonic.indexOf("(", index_start_char);
             index_end_char = index_last_index + 1; // assuming last index is min unless proven o.w.
 
-            if (try_end_vals[4] == index_start_char){ // handling offset: final term
+            if (try_end_vals[4] == index_start_char) { // handling offset: final term
                 index_start_char = try_end_vals[4] + 1; // "(" + 1
-                index_end_char =  try_end_vals[3]; // ")"
-            } else{
-                for(int i: try_end_vals){
-                    if(i == -1) continue;
+                index_end_char = try_end_vals[3]; // ")"
+            } else {
+                for (int i : try_end_vals) {
+                    if (i == -1) continue;
                     index_end_char = Math.min(index_end_char, i);
                 }
             }
@@ -53,46 +53,6 @@ public class General {
         cleaned_instr = cleaned_instr_AL.toArray(cleaned_instr);
         return cleaned_instr;
     }
-    /* BACKUP
-     public static String[] mnemonic_cleaner(String mnemonic) {
-        ArrayList<String> cleaned_instr_AL = new ArrayList<>(); // for dynamically adding
-        int index_last_index = find_last_index(mnemonic); // last valid index of assembly instruction
-        int index_start_char = find_non_space(0, mnemonic); // pointer for beginning of current instruction
-        int index_end_char = -1; // pointer for end of current instruction
-        int index_comma = -1;
-        int index_dollar_sign = mnemonic.indexOf("$"); // determines if "j" or not: I think all instructions except "j" have "$"
-        int index_paren = -1;
-
-        while (index_start_char <= index_last_index) // stop when reached last index
-        {
-            index_dollar_sign = mnemonic.indexOf("$", index_start_char + 1);
-            index_comma = mnemonic.indexOf(",", index_start_char + 1);
-            index_end_char = mnemonic.indexOf(" ", index_start_char + 1); // initialing the "end" pointer as the next space unless overshot the commas or $
-            index_paren = mnemonic.indexOf(")", index_start_char + 1);
-
-            if (index_end_char > index_paren && index_paren != -1) { // overshot parenthesis
-                index_end_char = index_paren+1;
-            } else if (index_end_char > index_comma && index_comma != -1) { // overshot comma
-                index_end_char = index_comma;
-            } else if (index_end_char > index_dollar_sign && index_dollar_sign != -1) { // overshot $
-                index_end_char = index_dollar_sign;
-            } else if (index_end_char == -1 || index_end_char > index_last_index) { // if no remaining space, comma, or $ after starting index then we're on the last instruction
-                index_end_char = index_last_index + 1;
-            }
-
-            String op = mnemonic.substring(index_start_char, index_end_char);
-            cleaned_instr_AL.add(op);
-
-            index_start_char = find_non_space(index_end_char + 1, mnemonic); // advancing to next "non-space" char
-        }
-
-        // Converting ArrayList<String> -> String[]
-        String[] cleaned_instr = new String[cleaned_instr_AL.size()];
-        cleaned_instr = cleaned_instr_AL.toArray(cleaned_instr);
-        return cleaned_instr;
-    }
-     */
-
 
     /*
         Helper method for "mnemonic_cleaner". Looking for 1st "non" white space character.

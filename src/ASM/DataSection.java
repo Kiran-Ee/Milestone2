@@ -29,8 +29,9 @@ public class DataSection {
     }
 
     public String calc_next_address(String prev_address, int current_size) {
-
-        return null;
+        int hexValue = Integer.parseInt(prev_address, 16);
+        int sum = hexValue + current_size;
+        return Integer.toHexString(sum);
     }
 
     /*
