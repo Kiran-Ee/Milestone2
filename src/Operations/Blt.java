@@ -1,6 +1,6 @@
 package Operations;
 
-public class Blt {
+public class Blt implements PseudoOperation{
 
     public Blt(String[] cleaned_instruction) {
     }
@@ -8,4 +8,5 @@ public class Blt {
     public String[] get_hex() {
         return null;
     }
+
 }
