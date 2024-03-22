@@ -1,5 +1,5 @@
 package Operations;
-// Josiah
+
 public class Blt {
 
     private String[] originalInstruction;

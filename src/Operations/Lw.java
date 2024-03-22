@@ -15,13 +15,11 @@ LW rt, offset(base)
  Machine Code Format:
     [LW(6: 100011), base(5), rt(5), offset(16)]
 Desc: rt <--memory[base+offset]
-
      */
     public Lw(String[] cleaned_instr) {
-        String[] base_offset = General.offset_parser(cleaned_instr[2]); // {base, offset}
         rt = cleaned_instr[1];
-        base = base_offset[0];
-        offset = base_offset[1];
+        base = cleaned_instr[3];
+        offset = cleaned_instr[2];
     }
 
     public String get_hex() {

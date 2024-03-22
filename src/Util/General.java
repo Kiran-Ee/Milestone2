@@ -17,30 +17,29 @@ public class General {
      * @return: Cleaned list of strings representing 1 part of an assembly instruction.
      * Example: “  add$s0, $a1,      $t7 #ignore" ->  ["add","$s0","$a1","t7"]
      */
-    String[] mnemonic_cleaner(String mnemonic) {
+    public static String[] mnemonic_cleaner(String mnemonic) {
         ArrayList<String> cleaned_instr_AL = new ArrayList<>(); // for dynamically adding
         int index_last_index = find_last_index(mnemonic); // last valid index of assembly instruction
         int index_start_char = find_non_space(0, mnemonic); // pointer for beginning of current instruction
         int index_end_char = -1; // pointer for end of current instruction
-        int index_comma = -1;
-        int index_dollar_sign = mnemonic.indexOf("$"); // determines if "j" or not: I think all instructions except "j" have "$"
-        int index_paren = -1;
 
-        while (index_start_char <= index_last_index) // stop when reached last index
-        {
-            index_dollar_sign = mnemonic.indexOf("$", index_start_char + 1);
-            index_comma = mnemonic.indexOf(",", index_start_char + 1);
-            index_end_char = mnemonic.indexOf(" ", index_start_char + 1); // initialing the "end" pointer as the next space unless overshot the commas or $
-            index_paren = mnemonic.indexOf(")", index_start_char + 1);
+        while (index_start_char <= index_last_index) { // stop when reached last index
+            int[] try_end_vals = new int[5];
+            try_end_vals[0] = mnemonic.indexOf("$", index_start_char + 1);
+            try_end_vals[1] = mnemonic.indexOf(",", index_start_char + 1);
+            try_end_vals[2] = mnemonic.indexOf(" ", index_start_char + 1);
+            try_end_vals[3] = mnemonic.indexOf(")", index_start_char + 1);
+            try_end_vals[4] = mnemonic.indexOf("(", index_start_char);
+            index_end_char = index_last_index + 1; // assuming last index is min unless proven o.w.
 
-            if (index_end_char > index_paren && index_paren != -1) { // overshot parenthesis
-                index_end_char = index_paren+1;
-            } else if (index_end_char > index_comma && index_comma != -1) { // overshot comma
-                index_end_char = index_comma;
-            } else if (index_end_char > index_dollar_sign && index_dollar_sign != -1) { // overshot $
-                index_end_char = index_dollar_sign;
-            } else if (index_end_char == -1 || index_end_char > index_last_index) { // if no remaining space, comma, or $ after starting index then we're on the last instruction
-                index_end_char = index_last_index + 1;
+            if (try_end_vals[4] == index_start_char) { // handling offset: final term
+                index_start_char = try_end_vals[4] + 1; // "(" + 1
+                index_end_char = try_end_vals[3]; // ")"
+            } else {
+                for (int i : try_end_vals) {
+                    if (i == -1) continue;
+                    index_end_char = Math.min(index_end_char, i);
+                }
             }
 
             String op = mnemonic.substring(index_start_char, index_end_char);
@@ -55,7 +54,6 @@ public class General {
         return cleaned_instr;
     }
 
-
     /*
         Helper method for "mnemonic_cleaner". Looking for 1st "non" white space character.
         @param:
@@ -64,7 +62,7 @@ public class General {
         @return:
             returns the start index if no space found
      */
-    private int find_non_space(int start, String str) {
+    public static int find_non_space(int start, String str) {
         int index_non_space = -1;
         for (int i = start; i < str.length(); i++) {
             char s = str.charAt(i);
@@ -86,7 +84,7 @@ public class General {
        @return:
            returns the start index if no space found
     */
-    private int find_last_index(String str) {
+    private static int find_last_index(String str) {
         int index_start = str.length() - 1;
         int index_comment = str.indexOf("#");
         int index_last_index = -1;
@@ -108,144 +106,85 @@ public class General {
      * @param cleaned_instr: A String[] which contains the necessary parts of a MIPS instruction.
      * @return: string of the hexadecimal representing to instruction.
      */
-    String instruction_factory(String[] cleaned_instr) { // package private "Util"
+    public static String instruction_factory(String[] cleaned_instr) {
         String instruction = cleaned_instr[0];
         String hex = "";
-        Operation op_obj = null;
-        switch (instruction) {
-            case "add":
-                op_obj = new Add(cleaned_instr);
-                break;
-            case "addiu":
-                op_obj = new Addiu(cleaned_instr);
-                break;
-            case "and":
-                op_obj = new And(cleaned_instr);
-                break;
-            case "andi":
-                op_obj = new AndI(cleaned_instr);
-                break;
-            case "beq":
-                op_obj = new Beq(cleaned_instr);
-                break;
-            case "bne":
-                op_obj = new Bne(cleaned_instr);
-                break;
-            case "j":
-                op_obj = new j(cleaned_instr);
-                break;
-            case "lui":
-                op_obj = new Lui(cleaned_instr);
-                break;
-            case "lw":
-                op_obj = new Lw(cleaned_instr);
-                break;
-            case "or":
-                op_obj = new Or(cleaned_instr);
-                break;
-            case "ori":
-                op_obj = new Ori(cleaned_instr);
-                break;
-            case "slt":
-                op_obj = new Slt(cleaned_instr);
-                break;
-            case "sub":
-                op_obj = new Sub(cleaned_instr);
-                break;
-            case "sw":
-                op_obj = new Sw(cleaned_instr);
-                break;
-            case "syscall":
-                op_obj = new Syscall(cleaned_instr);
-                break;
-            default:
-                throw new IllegalArgumentException("Entered invalid operation to instruction_factory");
-        }
-        hex = op_obj.get_hex();
-
-        // Java will remove the left most "0" for the Hex string, so adding it back for the prof's requirements
-        while (hex.length() < 8) { // padding
-            hex = "0" + hex;
-        }
-
-        return hex;
+        Operation op_obj = switch (instruction) {
+            case "add" -> new Add(cleaned_instr);
+            case "addiu" -> new Addiu(cleaned_instr);
+            case "and" -> new And(cleaned_instr);
+            case "andi" -> new AndI(cleaned_instr);
+            case "beq" -> new Beq(cleaned_instr);
+            case "bne" -> new Bne(cleaned_instr);
+            case "j" -> new j(cleaned_instr);
+            case "lui" -> new Lui(cleaned_instr);
+            case "lw" -> new Lw(cleaned_instr);
+            case "or" -> new Or(cleaned_instr);
+            case "ori" -> new Ori(cleaned_instr);
+            case "slt" -> new Slt(cleaned_instr);
+            case "sub" -> new Sub(cleaned_instr);
+            case "sw" -> new Sw(cleaned_instr);
+            case "syscall" -> new Syscall(cleaned_instr);
+            default -> throw new IllegalArgumentException("Entered invalid operation to instruction_factory");
+        };
+        return pad_hex(op_obj.get_hex(), 8);// Java will remove the left most "0" for the Hex string, so adding it back for the prof's requirements
     }
 
+    public static String[] pseudo_instruction_factory(String[] cleaned_instr) {
+        String[] hex_arr;
+        PseudoOperation ps_op_obj = switch (cleaned_instr[0]) {
+            case "li" -> new Li(cleaned_instr);
+            case "la" -> new La(cleaned_instr);
+            case "blt" -> new Blt(cleaned_instr);
+            default -> throw new IllegalArgumentException("Send invalid instruction to pseudo_instruction_factory");
+        };
+        hex_arr = ps_op_obj.get_hex();
+        for (int i = 0; i < hex_arr.length; i++)
+            hex_arr[i] = pad_hex(hex_arr[i], 8);
+
+        return hex_arr;
+    }
 
     /**
      * @param register: A String representing a register.
      * @return: Returns a binary string representing the register
      */
     public static String register_to_binary(String register) {
-        String binary = "";
-        if (register.equals("$zero") || register.equals("$0") || register.equals("$r0"))
-            binary = "00000";
-        else if (register.equals("$at") || register.equals("$1"))
-            binary = "00001";
-        else if (register.equals("$v0") || register.equals("$2"))
-            binary = "00010";
-        else if (register.equals("$v1") || register.equals("$3"))
-            binary = "00011";
-        else if (register.equals("$a0") || register.equals("$4"))
-            binary = "00100";
-        else if (register.equals("$a1") || register.equals("$5"))
-            binary = "00101";
-        else if (register.equals("$a2") || register.equals("$6"))
-            binary = "00110";
-        else if (register.equals("$a3") || register.equals("$7"))
-            binary = "00111";
-        else if (register.equals("$t0") || register.equals("$8"))
-            binary = "01000";
-        else if (register.equals("$t1") || register.equals("$9"))
-            binary = "01001";
-        else if (register.equals("$t2") || register.equals("$10"))
-            binary = "01010";
-        else if (register.equals("$t3") || register.equals("$11"))
-            binary = "01011";
-        else if (register.equals("$t4") || register.equals("$12"))
-            binary = "01100";
-        else if (register.equals("$t5") || register.equals("$13"))
-            binary = "01101";
-        else if (register.equals("$t6") || register.equals("$14"))
-            binary = "01110";
-        else if (register.equals("$t7") || register.equals("$15"))
-            binary = "01111";
-        else if (register.equals("$s0") || register.equals("$16"))
-            binary = "10000";
-        else if (register.equals("$s1") || register.equals("$17"))
-            binary = "10001";
-        else if (register.equals("$s2") || register.equals("$18"))
-            binary = "10010";
-        else if (register.equals("$s3") || register.equals("$19"))
-            binary = "10011";
-        else if (register.equals("$s4") || register.equals("$20"))
-            binary = "10100";
-        else if (register.equals("$s5") || register.equals("$21"))
-            binary = "10101";
-        else if (register.equals("$s6") || register.equals("$22"))
-            binary = "10110";
-        else if (register.equals("$s7") || register.equals("$23"))
-            binary = "10111";
-        else if (register.equals("$t8") || register.equals("$24"))
-            binary = "11000";
-        else if (register.equals("$t9") || register.equals("$25"))
-            binary = "11001";
-        else if (register.equals("$k0") || register.equals("$26"))
-            binary = "11010";
-        else if (register.equals("$k1") || register.equals("$27"))
-            binary = "11011";
-        else if (register.equals("$gp") || register.equals("$28"))
-            binary = "11100";
-        else if (register.equals("$sp") || register.equals("$29"))
-            binary = "11101";
-        else if (register.equals("$fp") || register.equals("$30"))
-            binary = "11110";
-        else if (register.equals("$ra") || register.equals("$31"))
-            binary = "11111";
-        else
-            throw new IllegalArgumentException("Entered invalid register to register_to_binary");
-
-        return binary;
+        return switch (register) {
+            case "$zero", "$0", "$r0" -> "00000";
+            case "$at", "$1" -> "00001";
+            case "$v0", "$2" -> "00010";
+            case "$v1", "$3" -> "00011";
+            case "$a0", "$4" -> "00100";
+            case "$a1", "$5" -> "00101";
+            case "$a2", "$6" -> "00110";
+            case "$a3", "$7" -> "00111";
+            case "$t0", "$8" -> "01000";
+            case "$t1", "$9" -> "01001";
+            case "$t2", "$10" -> "01010";
+            case "$t3", "$11" -> "01011";
+            case "$t4", "$12" -> "01100";
+            case "$t5", "$13" -> "01101";
+            case "$t6", "$14" -> "01110";
+            case "$t7", "$15" -> "01111";
+            case "$s0", "$16" -> "10000";
+            case "$s1", "$17" -> "10001";
+            case "$s2", "$18" -> "10010";
+            case "$s3", "$19" -> "10011";
+            case "$s4", "$20" -> "10100";
+            case "$s5", "$21" -> "10101";
+            case "$s6", "$22" -> "10110";
+            case "$s7", "$23" -> "10111";
+            case "$t8", "$24" -> "11000";
+            case "$t9", "$25" -> "11001";
+            case "$k0", "$26" -> "11010";
+            case "$k1", "$27" -> "11011";
+            case "$gp", "$28" -> "11100";
+            case "$sp", "$29" -> "11101";
+            case "$fp", "$30" -> "11110";
+            case "$ra", "$31" -> "11111";
+            default -> throw new IllegalArgumentException("Entered invalid register to register_to_binary");
+        };
     }//
 
 
@@ -263,13 +202,11 @@ public class General {
         String hex = "";
         int dec = -1;
 
-        if (is_hex == -1)  // not hex imm
-        {
-            if (immed == "") { // special case, no offset given ... lw $r1, ($r2)
+        if (is_hex == -1) { // not hex imm
+            if (immed == "")  // special case, no offset given ... lw $r1, ($r2)
                 dec = 0;
-            } else {
+            else
                 dec = Integer.parseInt(immed); // String(Decimal) -> int(decimal)
-            }
 
             boolean invalid_signed = ((dec > 32767 || dec < -32768) && (signed));
             boolean invalid_unsigned = ((dec < 0) && !(signed));
@@ -355,9 +292,7 @@ public class General {
         int length = binary.length();
         if (negative) { // neg - handled correctly by Integer.parseInt but in "32 bits" not "16"
             binary = binary.substring(32 - padding);
-        }
-        // ADD if else(binary.length>16){PAD w/ 26 bits!}
-        else { // pos - pad remaining bits
+        } else { // pos - pad remaining bits
             for (int i = 0; i < padding - length; i++) {
                 binary = pad + binary;
             }
@@ -375,27 +310,9 @@ public class General {
      */
     public static String pad_hex(String hex, int padding) {
         while (hex.length() < padding) { // padding
-            hex = "0" + hex; //IF IT'S NEGATIVE (signed) THEN THIS MIGHT NEED TO BE F?
+            hex = "0" + hex;
         }
         return hex;
-    }
-
-
-    /**
-     * Used by any operation with an offset and register format. Ex: 50($t)
-     *
-     * @param address: String representing a base & offset.
-     * @return String array: [0]:base [1]:offset
-     */
-    public static String[] offset_parser(String address) {
-        if (!(address instanceof String))
-            throw new IllegalArgumentException("Can't send in not String to offset_parser");
-
-        String offset = address.substring(0, address.indexOf('('));
-        String base = address.substring(address.indexOf('(') + 1, address.indexOf(')'));
-
-        String[] s = new String[]{base, offset};
-        return s; // returns [base, offset]
     }
 } //end: General Class
 

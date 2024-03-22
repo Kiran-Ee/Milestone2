@@ -35,8 +35,8 @@ class TextLineCleanerTest {
     String[] j1_strArr = new String[]{"j", "JumpLabel"};
     String j1 = "j JumpLabel";
     String j1_comment = "j JumpLabel#comment";
-    String j1_spacesTab = " j      JumpLable     ";
-    String j1_comment_with_spacesTab = " j      JumpLable          #comment";
+    String j1_spacesTab = " j      JumpLabel     ";
+    String j1_comment_with_spacesTab = " j      JumpLabel          #comment";
 
     String[] bne1_strArr = new String[]{"bne", "$t0", "$zero", "ITS_EVEN"};
     String bne1 = "bne $t0, $zero, ITS_EVEN";
@@ -50,17 +50,22 @@ class TextLineCleanerTest {
     String beq1_spacesTab = " beq    $t0,$zero,     ITS_EVEN";
     String beq1_comment_with_spacesTab = "  beq    $t0,$zero,     ITS_EVEN    #comment";
 
+    String[] lbl1_strArr = new String[]{"label:"};
+    String lbl1 = "label:";
+    String lbl1_comment = "label:#comment";
+    String lbl1_spacesTab = " label:    ";
+    String lbl1_comment_with_spacesTab = " label:   #comment ";
+
     // Empty/Comment lines
-    String[] empty1_strArr = new String[]{""};
+    String[] empty1_strArr = new String[]{};
     String empty1 = "";
     String empty2 = " ";
     String empty3 = "    ";
 
-    String[] comment1_strArr = new String[]{""};
+    String[] comment1_strArr = new String[]{};
     String comment1 = "#";
     String comment2 = " #comment";
     String comment3 = "    #randomline but multiple words with #$,:.-[q           ";
-
 
     // Pseodos
     String[] li_strArr = new String[]{"li", "$s1", "10"};
@@ -95,21 +100,21 @@ class TextLineCleanerTest {
     String la_neg_spacesTab = " la    $s1,-ITS_ODD     ";
     String la_neg_comment_with_spacesTab = " la    $s1,-ITS_ODD     #comment";
 
-    String[] blt_strArr = new String[]{"blt", "$at", "$s3,", "branchtime"};
-    String[] blt_hex_strArr = new String[]{"blt", "$at", "0xbranchtime"};
-    String[] blt_neg_strArr = new String[]{"blt", "$at", "-branchtime"};
+    String[] blt_strArr = new String[]{"blt", "$at", "$s3", "branchtime"};
+    String[] blt_hex_strArr = new String[]{"blt", "$at", "$5", "0xbranchtime"};
+    String[] blt_neg_strArr = new String[]{"blt", "$at", "$0", "-branchtime"};
     String blt = "blt, $at, $s3, branchtime";
     String blt_comment = "blt, $at, $s3,  branchtime#comment";
     String blt_spacesTab = " blt, $at,$s3,          branchtime     ";
     String blt_comment_with_spacesTab = " blt, $at,$s3,          branchtime     #comment";
-    String blt_hex = "blt, $at, 0xbranchtime";
-    String blt_hex_comment = "blt, $at, 0xbranchtime#comment";
-    String blt_hex_spacesTab = " blt, $at,0xbranchtime     ";
-    String blt_hex_comment_with_spacesTab = " blt,$at,0xbranchtime     #comment";
-    String blt_neg = "blt, $at, -branchtime";
-    String blt_neg_comment = "blt, $at, -branchtime#comment";
-    String blt_neg_spacesTab = " blt,   $at,-branchtime     ";
-    String blt_neg_comment_with_spacesTab = " blt,   $at,-branchtime     #comment";
+    String blt_hex = "blt, $at, $5 0xbranchtime";
+    String blt_hex_comment = "blt, $at,$5 0xbranchtime#comment";
+    String blt_hex_spacesTab = " blt, $at,$5 0xbranchtime     ";
+    String blt_hex_comment_with_spacesTab = " blt,$at, $5 0xbranchtime     #comment";
+    String blt_neg = "blt, $at,$0 -branchtime";
+    String blt_neg_comment = "blt, $at, $0 -branchtime#comment";
+    String blt_neg_spacesTab = " blt,   $at,$0 -branchtime     ";
+    String blt_neg_comment_with_spacesTab = " blt,   $at, $0 -branchtime     #comment";
 
     // r
     @Test
@@ -256,6 +261,27 @@ class TextLineCleanerTest {
         assertArrayEquals(beq1_strArr, text_sec.text_line_cleaner(beq1_comment_with_spacesTab));
     }
 
+    @Test
+    void setLbl1() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1));
+    }
+
+    @Test
+    void setLbl1_comment() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1_comment));
+    }
+
+    @Test
+    void setLbl1_spacesTab() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1_spacesTab));
+    }
+
+    @Test
+    void setLbl1_comment_with_spacesTab() {
+        assertArrayEquals(lbl1_strArr, text_sec.text_line_cleaner(lbl1_comment_with_spacesTab));
+    }
+
+
     // Empty
     @Test
     void setEmpty1() {
@@ -289,7 +315,6 @@ class TextLineCleanerTest {
     }
 
     // Pseudos
-    // i=li
     @Test
     void setLi1() {
         assertArrayEquals(li_strArr, text_sec.text_line_cleaner(li));

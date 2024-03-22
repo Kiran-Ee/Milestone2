@@ -11,10 +11,9 @@ public class Sw implements Operation{
 
     public Sw(String[] cleaned_instr)
     {
-        String[] base_offset = General.offset_parser(cleaned_instr[2]); // {base, offset}
-        base = base_offset[0];
         rt = cleaned_instr[1];
-        offset = base_offset[1];
+        base = cleaned_instr[3];
+        offset = cleaned_instr[2];
     }
     public String get_hex() {
         String base_binary = General.register_to_binary(base);

@@ -1,4 +1,4 @@
-package ASM.Text;
+package ASM.Data;
 
 import ASM.DataSection;
 import org.junit.jupiter.api.Test;

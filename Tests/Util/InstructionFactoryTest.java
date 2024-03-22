@@ -37,9 +37,9 @@ class InstructionFactoryTest {
     String[] i5_hex = new String[]{"lui", "$t5", "0x1234"};
     // don't think there are any negatives for LUI
 
-    String[] i6 = new String[]{"lw", "$t7", "100($t0)"};
-    String[] i6_hex = new String[]{"lw", "$t7", "0x100($t0)"};
-    String[] i6_neg = new String[]{"lw", "$t7", "-100($t0)"};
+    String[] i6 = new String[]{"lw", "$t7", "100", "$t0"};
+    String[] i6_hex = new String[]{"lw", "$t7", "0x100", "$t0"};
+    String[] i6_neg = new String[]{"lw", "$t7", "-100", "$t0"};
 
     String[] r3 = new String[]{"or", "$t5", "$t6", "$s0"};
 
@@ -51,9 +51,9 @@ class InstructionFactoryTest {
 
     String[] r5 = new String[]{"sub", "$s5", "$s4", "$s1"};
 
-    String[] i8 = new String[]{"sw", "$t2", "100($s0)"};
-    String[] i8_hex = new String[]{"sw", "$t2", "0x100($s0)"};
-    String[] i8_neg = new String[]{"sw", "$t2", "-100($s0)"}; //-9999 = D8F1
+    String[] i8 = new String[]{"sw", "$t2", "100", "$s0"};
+    String[] i8_hex = new String[]{"sw", "$t2", "0x100", "$s0"};
+    String[] i8_neg = new String[]{"sw", "$t2", "-100", "$s0"}; //-9999 = D8F1
 
     String[] sys = new String[]{"syscall"};
 

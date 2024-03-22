@@ -54,11 +54,21 @@ class MnemonicCleanerTest {
     String[] prof3_strArr = new String[]{"andi", "$zero", "$ra", "9"};
     String prof3 = " andi $zero, $ra, 9";
 
-    String[] prof4_strArr = new String[]{"sw", "$v0", "($a1)"};
+    String[] prof4_strArr = new String[]{"sw", "$v0", "$a1"};
     String prof4 = "sw $v0, ($a1)# Comment";
 
-    String[] prof5_strArr = new String[]{"sw", "$v0", "0x($a1)"};
+    String[] prof5_strArr = new String[]{"sw", "$v0", "0x", "$a1"};
     String prof5 = "sw $v0, 0x($a1)# Comment";
+
+
+    String[] asm_label_strArr = new String[]{"label"};  // this will always fail (on purpose) ... the ":" will be handled in the text_line_cleaner
+    String asm_label = " label: ";
+
+    String[] asm_label_comment1_strArr = new String[]{"label"};
+    String asm_label_comment1 = " label:#comment ";
+
+    String[] asm_label_comment2_strArr = new String[]{"label"};
+    String asm_label_comment2 = " label: #comment ";
 
     // Testing Return Type
     @Test
@@ -200,10 +210,12 @@ class MnemonicCleanerTest {
     void return_prof2() {
         assertArrayEquals(prof2_strArr, gen.mnemonic_cleaner(prof2));
     }
+
     @Test
     void return_prof3() {
         assertArrayEquals(prof3_strArr, gen.mnemonic_cleaner(prof3)); //when last character is the last index.
     }
+
     @Test
     void return_prof4() {
         assertArrayEquals(prof4_strArr, gen.mnemonic_cleaner(prof4)); //when last character is the last index.
@@ -213,4 +225,19 @@ class MnemonicCleanerTest {
     void return_prof5() {
         assertArrayEquals(prof5_strArr, gen.mnemonic_cleaner(prof5)); //when last character is the last index.
     }
+
+
+//    // TESTING FOR "text_line_cleaner()" ... WILL ALWAYS FAIL ON PURPOSE! THE ":" IS HANDLED IN THAT METHOD
+//    @Test
+//    void return_label() {
+//        assertArrayEquals(asm_label_strArr, gen.mnemonic_cleaner(asm_label));
+//    }
+//    @Test
+//    void return_label_comment1() {
+//        assertArrayEquals(asm_label_comment1_strArr, gen.mnemonic_cleaner(asm_label_comment1));
+//    }
+//    @Test
+//    void return_label_comment2() {
+//        assertArrayEquals(asm_label_comment2_strArr, gen.mnemonic_cleaner(asm_label_comment2));
+//    }
 }

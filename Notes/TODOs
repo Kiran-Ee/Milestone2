@@ -1,23 +1,11 @@
 ####################################################################################################
 ---:TODOs:---
-1] Write tests for all of your sections:
     Kiran:
-    -	Fake_memory
-    -	Calc_data_size
-    -	Calc_next_instruction
-    -	Text_line_cleaner * (might need to give Josiah if too much work)
-    -	Calc_offset_address
+    - Pass tests for the methods in the Design Document.
     Tanja:
-    -	Asm_to_address-in general
-    -	Asm_parser
-    -	Address_factory
-    -	Declaration_line_cleaner
+    - Pass tests for the methods in the Design Document.
     Josiah:
-    -	LI
-    -	LA
-    -	BLT
-2] Pass Tests
-3] Add missing pseudo's/new labels to previous assignment tests
+    - Pass tests for the methods in the Design Document.
 
 
 

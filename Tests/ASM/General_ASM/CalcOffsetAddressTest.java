@@ -32,33 +32,33 @@ class CalcOffsetAddressTest {
     @Test
     void bad_address() {
         assertThrows(IllegalArgumentException.class,
-                () -> text_sec.calc_offset_address(i1, "000400005"));
+                () -> text_sec.calc_offset(i1, "000400005"));
     }
 
     // same
     @Test
     void i5_i5() {
-        assertEquals(0, text_sec.calc_offset_address(i5, i5));
+        assertEquals(0, text_sec.calc_offset(i5, i5));
     }
 
     // random combos
     @Test
     void i1_i2() {
-        assertEquals(1,text_sec.calc_offset_address(i1, i2));
+        assertEquals(1,text_sec.calc_offset(i1, i2));
     }
 
     @Test
     void i2_i1() {
-        assertEquals(-1,text_sec.calc_offset_address(i2, i1));
+        assertEquals(-1,text_sec.calc_offset(i2, i1));
     }
 
     @Test
     void i1_i20() {
-        assertEquals(19,text_sec.calc_offset_address(i1, i20));
+        assertEquals(19,text_sec.calc_offset(i1, i20));
     }
 
     @Test
     void i20_ii() {
-        assertEquals(-19,text_sec.calc_offset_address(i20, i1));
+        assertEquals(-19,text_sec.calc_offset(i20, i1));
     }
 }
