@@ -7,32 +7,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DeclarationLineCleanerTest {
     DataSection data_sec = new DataSection();
-    String lbl1 = " input_request: .asciiz Enter your integer:#comment testing";
-    String labelOnly = "    label:";
-    String labelData1 = " label:    .word 0x32";
-    String multipleWords = "    my_label_name: .word 0x32";
-    String label_spaces_tab = " label:  .word     0x32";
-    String[] dataLn1 = new String[]{"input_request", ".asciiz", "Enter your integer: "};
-    String[] expected = new String[]{"label"};
-    String[] labelData = new String[]{"label", ".word", "0x32"};
-    String[] label_with_multiple_words = new String[]{"my_label_name", ".word", "0x32"};
+    String lbl1 = " input_request: .asciiz \"Enter your integer:\"#comment testing";
+    String lbl2 = " input_request:     .asciiz      \"Enter your integer:\"#comment testing  #comment";
+    String lbl3 = "input_request:       .asciiz            \"Enter your integer:\"#comment testing#comment";
+    String lbl4 = " fasdfa:       .asciiz            \"fasdfas\"#comment testing#comment";
+
+    String[] dataLn1 = new String[]{"input_request", "Enter your integer:"};
+    String[] dataLn2 = new String[]{"fasdfa", "fasdfas"};
+
     @Test
-    void declaration_line_cleaner() {
+    void setLbl1() {
         assertArrayEquals(dataLn1, data_sec.declaration_line_cleaner(lbl1));}
     @Test
-    void label_only(){
-        assertArrayEquals(expected, data_sec.declaration_line_cleaner(labelOnly));
+    void setLbl2(){
+        assertArrayEquals(dataLn1, data_sec.declaration_line_cleaner(lbl2));
     }
     @Test
-    void label_data(){
-        assertArrayEquals(labelData, data_sec.declaration_line_cleaner(labelData1));
+    void setLbl3(){
+        assertArrayEquals(dataLn1, data_sec.declaration_line_cleaner(lbl3));
     }
     @Test
-    void multiple_word_label(){
-        assertArrayEquals(label_with_multiple_words, data_sec.declaration_line_cleaner(multipleWords));
-    }
-    @Test
-    void label_spaces(){
-        assertArrayEquals(labelData, data_sec.declaration_line_cleaner(label_spaces_tab));
+    void setLbl4(){
+        assertArrayEquals(dataLn2, data_sec.declaration_line_cleaner(lbl4));
     }
 }

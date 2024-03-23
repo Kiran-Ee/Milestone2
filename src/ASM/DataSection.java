@@ -1,6 +1,9 @@
 package ASM;
 
+import Util.General;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap; // like hash but maintains ordering + allows us to immediately find labels
 import java.util.List;
 import java.util.Map;
@@ -35,32 +38,25 @@ public class DataSection {
         return Integer.toHexString(sum);
     }
 
-    /*
-    need revision-during the meeting you mentioned that we may need to import the data value within the data cleaner
-    that being said wouldn't we need one extra parameter dataValue in the method signature and
-    instead of line to have label ex String[] declaration_line_cleaner(String label, string dataValue)
-    also if we add additional par.dataValue may need to construct the line by concatenating label and dataValue
-    ex.String line = label.trim() + ""+ dataValue.trim();
-    p.s below is first draft of the method implementation base on pre-post conditions and test cases
-     */
-
     public String[] declaration_line_cleaner(String line) {
-        //  for empty line and return empty sting
-        if(line == null || line.trim().isEmpty()){
+        if(line == null || line.trim().isEmpty()) //  for empty line and return empty sting
             return new String[]{};
-        }
-
-        //split the line by tab, whitespaces, comments
-        String[] p = line.split("[\\s\\t:#]+");
-
-        //remove empty elements from the array
+        //label name
         List<String> cleanedPart = new ArrayList<>();
-        for(String part : p){
-            if(!part.isEmpty()){
-                cleanedPart.add(part);
-            }
-        }
-        //convert the list to a string array
+        int start_ind = General.find_non_space(0, line);
+        int colon_ind = line.indexOf(":");
+        cleanedPart.add(line.substring(start_ind, colon_ind));
+
+        //data type
+        start_ind = General.find_non_space(colon_ind + 1, line);
+        int space_ind = line.indexOf(" ", start_ind + 1);
+        //cleanedPart.add(line.substring(start_ind, space_ind)); // don't add data type
+
+        // data
+        start_ind = General.find_non_space(space_ind + 1, line);
+        int last_qoute_ind = line.indexOf("\"", start_ind + 1);
+        cleanedPart.add(line.substring(start_ind+1, last_qoute_ind));
+
         return cleanedPart.toArray(new String[0]);
     }
 
