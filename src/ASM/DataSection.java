@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap; // like hash but maintains ordering + allows us to immediately find labels
 import java.util.List;
+import java.util.Map;
 
 public class DataSection {
     public LinkedHashMap<String, String[]> fake_data_memory(String[][] cleaned_data_sec) {
@@ -59,7 +60,34 @@ public class DataSection {
         return cleanedPart.toArray(new String[0]);
     }
 
-    public String[] data_to_little_endian(LinkedHashMap<String, String[]> dataMemory) {
-        return null;
+    public String[] data_to_little_endian(LinkedHashMap<String, String[]> dataMemory) { //Water bottle = etaW-ob r-eltt-___0
+        String[] returnString = new String[]{};
+        dataMemory.forEach((key, value) -> { // Loops for every Label
+            int curIndex = 1;
+            int multiplier = 1;
+            while(value[multiplier*4 - curIndex] != null){ // Loops the list from index 3->0, 7->4, 11->8, but stops at null
+                int ascii = value[multiplier*4 - curIndex].charAt(0);
+                returnString[multiplier-1] = returnString[multiplier-1] + Integer.toHexString(ascii);
+                if(++curIndex > 4){
+                    curIndex = 1;
+                    ++multiplier;
+                }
+            }
+            //Need a thing to add null character, but needs case for if adding null to next word
+            if(curIndex >= 4){
+                ++multiplier;
+                curIndex = 1;
+            } else {
+                returnString[multiplier - 1] = returnString[multiplier - 1] + "00";
+                curIndex++;
+            }
+
+            //Fill the word with the Substitute ascii value like MIPS, Dec=26, Hex=1A
+            while(curIndex < 4){
+                returnString[multiplier-1] = returnString[multiplier-1] + Integer.toHexString(26); //MIPS puts this for blanks
+                ++curIndex;
+            }
+        });
+        return returnString;
     }
 }
