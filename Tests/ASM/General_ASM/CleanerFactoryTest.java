@@ -8,50 +8,43 @@ import static org.junit.Assert.assertArrayEquals;
 
 public class CleanerFactoryTest {
     GeneralASM sec = new GeneralASM();
+
+    // ADD TEST_FILE1
     String data_file1 =
-            ".data\n" +
-                    "Label1: .asciiz \"request\" #commentshouldn't be included       \n" +
+            "Label1: .asciiz \"request\" #commentshouldn't be included       \n" +
                     "      spaces: .asciiz    \" sp a ces\" \n\n\n" +
-                    " LotsOfLineBreaks: \"Line\"";
+                    " LotsOfLineBreaks: .asciiz  \"Line\"#comment";
     String[] instr1 = new String[]{"Label1", "request"};
     String[] instr2 = new String[]{"spaces", " sp a ces"};
     String[] instr3 = new String[]{"LotsOfLineBreaks", "Line"};
     String[][] cleaned_data_file1 = new String[][]{instr1, instr2, instr3};
 
+    String text_file1 =
+            "add $s1, $s3, $s\n" +
+                    "addiu $s1, $s2, 10 #test\n" +
+                    "       addiu   $s1,$2, 0x10\n" +
+                    "addiu  $s1,$s2,                    -10\n" +
+                    "        \n" +
+                    "   \n" +
+                    "\n\n\n\n" +
+                    "#comment line" +
+                    "j RandomLabel#withacomment\n" +
+                    "add $s5, $s2, $3";
+    String[] instr4 = new String[]{"add", "$s1", "$s3", "$s"};
+    String[] instr5 = new String[]{"addiu", "$s1", "$s2", "10"};
+    String[] instr6 = new String[]{"addiu", "$s1", "$2", "0x10"};
+    String[] instr7 = new String[]{"addiu", "$s1", "$s2", "-10"};
+    String[] instr8 = new String[]{"add", "$s5", "$s2", "$3"};
+
+    String[][] cleaned_data_file2 = new String[][]{instr4, instr5, instr6, instr7, instr8};
+
     @Test
-    void setInstr1(){
+    void setCleaned_data_file1() {
         assertArrayEquals(cleaned_data_file1, sec.cleaner_factory(true, data_file1));
     }
-/*
-String sEndian = ".data var: .word 0x123456789";
-String dataComm = ".data #comment var : .word 42";
-String validData = ".data var : .word 42 var1: .asciiz  Request";
-String branchJ = ".text loop: beq $t0, $t1, endloop j loop j endloop endloop: ";
-String labelAddress = ".text main: add $t0, $t1, $t2, j loop, loop: sub $t3, $t4, $t5";
-String[][] smallEndian = new String[][]{{"var", "0x78563412"}};
-String[][] dataComm1 = new String[][]{{"var", "42"}};
-String[][] validData1 = new String[][]{{"var", "42"}, {"var1", "Request"}};
-String[][] branch_j = new String[][]{{"loop", "beq $t0, $t1, endloop"}, {"", "j 0x0040000C"}, {"endloop", ""}};
-String[][] labelAddress1 = new String[][]{{"main", "add $t0, $t1, $t2"}, {"", "j 0x00400008"}, {"loop", "sub $t3, $t4, $t5"}};
 
-@Test
-void smlEndian(){
-    Assertions.assertArrayEquals(smallEndian, sec.cleaner_factory(true, sEndian));
+    @Test
+    void setCleaned_text_file1() {
+        assertArrayEquals(cleaned_data_file2, sec.cleaner_factory(false, text_file1));
+    }
 }
-@Test
-void data_comments(){
-    Assertions.assertArrayEquals(dataComm1, sec.cleaner_factory(true, dataComm));
-}
-@Test
-void valid_data(){
-    Assertions.assertArrayEquals(validData1, sec.cleaner_factory(true, validData));
-}
-@Test
-void branch_and_jump(){
-    Assertions.assertArrayEquals(branch_j, sec.cleaner_factory(false, branchJ));
-}
-@Test
-void label_address(){
-    Assertions.assertArrayEquals(labelAddress1, sec.cleaner_factory(false, labelAddress));
-}
-*/}

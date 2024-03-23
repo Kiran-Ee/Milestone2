@@ -31,15 +31,13 @@ public class TextSection {
     }
 
     public String[] text_line_cleaner(String line) {
-        if (line.trim().isEmpty()) { // empty line
+        if (line.trim().isEmpty())  // empty line
             return new String[]{};
-        }
 
         int index_start_char = General.find_non_space(0, line);
         String first_char = String.valueOf(line.charAt(index_start_char));
-        if (first_char.equals("#")) { // comment line
+        if (first_char.equals("#"))  // comment line
             return new String[]{};
-        }
 
         return General.mnemonic_cleaner(line);
     }
