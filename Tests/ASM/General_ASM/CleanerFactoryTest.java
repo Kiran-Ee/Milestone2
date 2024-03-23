@@ -19,6 +19,7 @@ public class CleanerFactoryTest {
     String[] instr3 = new String[]{"LotsOfLineBreaks", "Line"};
     String[][] cleaned_data_file1 = new String[][]{instr1, instr2, instr3};
 
+
     String text_file1 =
             "add $s1, $s3, $s\n" +
                     "addiu $s1, $s2, 10 #test\n" +
