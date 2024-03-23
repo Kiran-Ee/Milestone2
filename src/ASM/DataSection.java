@@ -70,6 +70,12 @@ public class DataSection {
             int curIndex = 1;
             int multiplier = 1;
             while(value[multiplier*4 - curIndex] != null){ // Loops the list from index 3->0, 7->4, 11->8, but stops at null
+                //Constructs left to right.
+                //Example: moon
+                //First loop: value[multiplier*4 - curIndex] = value[3]. Gets char hex value and places in string. "6E"
+                //Second loop: value[multiplier*4 - curIndex] = value[2]. Places new value at end of string "6E6F"
+                //Third loop: value[1]. String becomes "6E6F6F"
+                //Fourth loop: value[0] String is "6E6F6F6D" which is "noom"
                 int ascii = value[multiplier*4 - curIndex].charAt(0);
                 returnString[multiplier-1] = returnString[multiplier-1] + Integer.toHexString(ascii);
                 if(++curIndex > 4){
@@ -78,19 +84,34 @@ public class DataSection {
                 }
             }
             //Need a thing to add null character, but needs case for if adding null to next word
-            if(curIndex >= 4){
-                ++multiplier;
-                curIndex = 1;
+            // If index is divisible by 4, need a null at the end of next string.
+            //Example: Input: moon, OutputL: noom ___0
+
+            if((multiplier*4 - curIndex) % 4 == 0){
+                returnString[multiplier] = "20202000";
             } else {
-                returnString[multiplier - 1] = returnString[multiplier - 1] + "00";
-                curIndex++;
+                //If index is not divisible by 4, need null in current string
+                //Example: Input: Hello!, Output: lloH _0!o
+                //Fill the word with the Substitute ascii value like MIPS, Dec=26, Hex=1A
+                //multiplier*4 - curIndex = 3,2,1,0,7, When loop runs at index 7 = null, but needs to input indexes 6,5 still
+                String next = ""; //If this part runs there will be at least one empty space
+                boolean once = true;
+                for(int i = 1; i < 3; ++i){
+                    if(value[multiplier*4 - i - 1] != null && once){ //If next index is a char, place null
+                        next = next + "00";
+                        once = false; //Ensures only one is placed
+                    } else if (value[multiplier*4 - i] == null){ //If current doesn't exist, place substitute
+                        next = next + "20";
+                    } else {
+                        next = next + value[multiplier*4 - i]; //If does exist, place
+                    }
+                }
+                next = next + value[multiplier*4-4]; //Last char will always enter if this part is run
             }
 
-            //Fill the word with the Substitute ascii value like MIPS, Dec=26, Hex=1A
-            while(curIndex < 4){
-                returnString[multiplier-1] = returnString[multiplier-1] + Integer.toHexString(26); //MIPS puts this for blanks
-                ++curIndex;
-            }
+
+
+
         });
         return returnString;
     }
