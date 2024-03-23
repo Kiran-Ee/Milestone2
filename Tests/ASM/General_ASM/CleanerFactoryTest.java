@@ -31,6 +31,7 @@ public class CleanerFactoryTest {
                     "#comment line" +
                     "j RandomLabel#withacomment\n" +
                     "add $s5, $s2, $3";
+
     String[] instr4 = new String[]{"add", "$s1", "$s3", "$s"};
     String[] instr5 = new String[]{"addiu", "$s1", "$s2", "10"};
     String[] instr6 = new String[]{"addiu", "$s1", "$2", "0x10"};
