@@ -18,7 +18,7 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
     String[][] txt_ln3 = new String[][]{new String[]{"syscall"}, new String[]{"0040000c"}};
     String[][] txt_ln4 = new String[][]{new String[]{"li", "$v0", "5"}, new String[]{"00400010"}};
     String[][] txt_ln5 = new String[][]{new String[]{"syscall"}, new String[]{"00400014"}};
-    String[][] txt_ln6 = new String[][]{new String[]{"move", "$t4", "$v0"}, new String[]{"00400018"}};
+    // String[][] txt_ln6 = new String[][]{new String[]{"move", "$t4", "$v0"}, new String[]{"00400018"}}; // NOT INCLUDED IN MIPS
     String[][] txt_ln7 = new String[][]{new String[]{"andi", "$t0", "$t4", "0x1"}, new String[]{"0040001c"}};
     String[][] txt_ln8 = new String[][]{new String[]{"beq", "$t0", "$zero", "ITS_EVEN"}, new String[]{"0040002c"}};
     String[][] txt_ln9 = new String[][]{new String[]{"j", "ITS_ODD"}, new String[]{"00400024"}};
@@ -87,7 +87,7 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
         text_sec_1.put("2", txt_ln3);
         text_sec_1.put("3", txt_ln4);
         text_sec_1.put("4", txt_ln5);
-        text_sec_1.put("5", txt_ln6);
+        // text_sec_1.put("5", txt_ln6);
         text_sec_1.put("6", txt_ln7);
         text_sec_1.put("7", txt_ln8);
         text_sec_1.put("8", txt_ln9);

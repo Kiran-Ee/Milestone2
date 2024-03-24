@@ -49,8 +49,8 @@ public class TextSection {
         for (Map.Entry<String, String[][]> entry : text_mem.entrySet()) {
             String key = entry.getKey();
             if (key.contains(":")) continue; // shouldn't return "Text-Labels"
-            String[] instr_arr = entry.getValue()[0];
-            String op = instr_arr[0];
+            String[] instr_arr = entry.getValue()[0]; // ["add", "$0", "$1", "$2"]
+            String op = instr_arr[0]; // "add"
 
             if (LABEL_INSTR.contains(op)) {
                 label_factory(instr_arr, data_mem, text_mem); // replacing label w/ memory
@@ -107,9 +107,9 @@ public class TextSection {
         }
     }
 
-    public int calc_offset(String pc, String label_address) {
-        int pc_plus_4_int = Integer.parseInt(pc) + 1; // "4 bytes" = "1 word"
-        int lbl_int = Integer.parseInt(label_address);
+    public int calc_offset(String cur_addr_ind, String lbl_addr_ind) {
+        int pc_plus_4_int = Integer.parseInt(cur_addr_ind) + 1; // "4 bytes" = "1 word"
+        int lbl_int = Integer.parseInt(lbl_addr_ind);
         if (pc_plus_4_int < 0 || lbl_int < 0)
             throw new IllegalArgumentException("calc_offset: not possible to send negative index ...");
         return lbl_int - pc_plus_4_int;
