@@ -7,9 +7,9 @@ public class Li implements PseudoOperation {
 
     public Li(String[] cleaned_instructions){ //EX: "li, "$t0", "10010000"
         int shifted_for_lui = Integer.valueOf(cleaned_instructions[2], 16) >>> 4;
-        String[] lui = new String[]{"LUI", "$at", String.valueOf(shifted_for_lui)};
+        String[] lui = new String[]{"Lui", "$at", String.valueOf(shifted_for_lui)};
         int shifted_for_ori = Integer.valueOf(cleaned_instructions[2], 16) << 4 >>> 4;
-        String[] ori = new String[]{"ORI", cleaned_instructions[1], "$at", String.valueOf(shifted_for_ori)};
+        String[] ori = new String[]{"Ori", cleaned_instructions[1], "$at", String.valueOf(shifted_for_ori)};
         luihalf = new Lui(lui);
         orihalf = new Ori(ori);
         originalInstruction = cleaned_instructions;

@@ -1,5 +1,7 @@
 package Operations;
 
+import java.util.LinkedHashMap;
+
 public class Blt implements PseudoOperation {
 
     private String[] originalInstruction;
@@ -7,16 +9,16 @@ public class Blt implements PseudoOperation {
     private Bne bnehalf;
     private String reg1;
     private String reg2;
-    private String label;
+    private String offset;
 
-    public Blt(String[] cleaned_instructions){ //EX: "la, "$t0", "10010000"
+    public Blt(String[] cleaned_instructions) { //EX: "blt" "$t0" "$a3" "offset"
         reg1 = cleaned_instructions[1];
         reg2 = cleaned_instructions[2];
-        label = cleaned_instructions[3];
+        offset = cleaned_instructions[3]; //!!!ASSUMING WE SEND IN AN OFFSET OF THE LABEL ALREADY!!! ... handled in "text_to_hex_instructions"
         originalInstruction = cleaned_instructions;
-        String[] slt = new String[]{"SLT", "$at", reg1, reg2};
+        String[] slt = new String[]{"Slt", "$at", reg1, reg2};
         slthalf = new Slt(slt);
-        String[] bne = new String[]{"BNE", "$at", "$0", label};
+        String[] bne = new String[]{"Bne", "$at", "$0", offset}; //MUST SEND IN OFFSET NOT STRING LABEL
         bnehalf = new Bne(bne);
     }
 
