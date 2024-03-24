@@ -1,6 +1,6 @@
 package Operations;
 
-public class Blt {
+public class Blt implements PseudoOperation{
 
     private String[] originalInstruction;
     private Slt slthalf;

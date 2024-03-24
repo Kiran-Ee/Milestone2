@@ -2,16 +2,10 @@ package Operations;
 // Josiah
 public class Li implements PseudoOperation {
 
-    public Li(String[] cleaned_instruction) {
-    }
-
-    public String[] get_hex() {
-        return null;
-    }
-
     private String[] originalInstruction;
     private Lui luihalf;
     private Ori orihalf;
+
     public Li(String[] cleaned_instructions){ //EX: "li, "$t0", "10010000"
         int shifted_for_lui = Integer.valueOf(cleaned_instructions[2], 16) >>> 4;
         String[] lui = new String[]{"LUI", "$at", String.valueOf(shifted_for_lui)};

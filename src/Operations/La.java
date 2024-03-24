@@ -1,6 +1,6 @@
 package Operations;
 // Josiah
-public class La {
+public class La implements PseudoOperation{
 
     private String[] originalInstruction;
     private Lui luihalf;
