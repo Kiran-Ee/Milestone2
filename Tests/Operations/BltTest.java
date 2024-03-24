@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BltTest {
-    String[] blt1 = new String[]{"blt", "$a0", "$a1", "00400000"};
-    String[] blt1_hex_arr = new String[]{"slt $1 $4 $5", "bne $1 $0 00400000"};
-    String[] blt2 = new String[]{"blt", "$4", "$a1", "00400040"};
-    String[] blt2_hex_arr = new String[]{"slt $1 $4 $5", "bne $1 $0 00400040"};
-    String[] blt3 = new String[]{"blt", "$a0", "$5", "0040004c"};
-    String[] blt3_hex_arr = new String[]{"slt $1 $4 $5", "bne $1 $0 0040004c"};
-    String[] blt4 = new String[]{"blt", "$4", "$5", "00400028"};
-    String[] blt4_hex_arr = new String[]{"slt $1 $4 $5", "bne $1 $0 00400028"};
+    String[] blt1 = new String[]{"blt", "$a0", "$a1", "15"};
+    String[] blt1_hex_arr = new String[]{"0085082a", "1420000f"};
+    String[] blt2 = new String[]{"blt", "$4", "$a1", "0x0457"};
+    String[] blt2_hex_arr = new String[]{"0085082a", "14200457"};//"slt $1 $4 $5", "bne $1 $0 18"
+    String[] blt3 = new String[]{"blt", "$a0", "$5", "12"};
+    String[] blt3_hex_arr = new String[]{"0085082a", "1420000c"}; //"slt $1 $4 $5", "bne $1 $0 12"
+    String[] blt4 = new String[]{"blt", "$4", "$5", "-16"};
+    String[] blt4_hex_arr = new String[]{"0085082a", "1420fff0"};//"slt $1 $4 $5", "bne $1 $0 -16"
 
 
     @Test
