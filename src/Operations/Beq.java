@@ -11,12 +11,9 @@ public class Beq implements Operation{
     private String offset = "";
 
     public Beq(String[] cleaned_instr){
-//        if (cleaned_instructions.length != 4){
-////            throw new IllegalArgumentException("Invalid number of arguments");
-//        }
       rs = cleaned_instr[1];
       rt = cleaned_instr[2];
-      offset = cleaned_instr[3];
+      offset = cleaned_instr[3];  //!!!ASSUMING WE SEND IN AN OFFSET OF THE LABEL ALREADY!!! ... handled in "text_to_hex_instructions"
 
     }
     public String get_hex(){

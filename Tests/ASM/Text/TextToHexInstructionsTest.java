@@ -19,21 +19,21 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
     String[][] txt_ln4 = new String[][]{new String[]{"li", "$v0", "5"}, new String[]{"00400010"}};
     String[][] txt_ln5 = new String[][]{new String[]{"syscall"}, new String[]{"00400014"}};
     // String[][] txt_ln6 = new String[][]{new String[]{"move", "$t4", "$v0"}, new String[]{"00400018"}}; // NOT INCLUDED IN MIPS
-    String[][] txt_ln7 = new String[][]{new String[]{"andi", "$t0", "$t4", "0x1"}, new String[]{"0040001c"}};
-    String[][] txt_ln8 = new String[][]{new String[]{"beq", "$t0", "$zero", "ITS_EVEN"}, new String[]{"0040002c"}};
-    String[][] txt_ln9 = new String[][]{new String[]{"j", "ITS_ODD"}, new String[]{"00400024"}};
-    String[][] txt_ln10 = new String[][]{new String[]{"9"}, new String[]{"00400028"}}; // "ITS_EVEN" -> "li $v0 4"
-    String[][] txt_ln11 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400028"}};
-    String[][] txt_ln12 = new String[][]{new String[]{"la", "$a0", "even_output"}, new String[]{"0040002c"}};
-    String[][] txt_ln13 = new String[][]{new String[]{"syscall"}, new String[]{"00400034"}};
-    String[][] txt_ln14 = new String[][]{new String[]{"j", "EXIT"}, new String[]{"00400038"}};
-    String[][] txt_ln15 = new String[][]{new String[]{"14"}, new String[]{"0040003c"}}; // "ITS_ODD" -> "li $v0 4"
-    String[][] txt_ln16 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"0040003c"}};
-    String[][] txt_ln17 = new String[][]{new String[]{"la", "$a0", "odd_output"}, new String[]{"00400040"}};
-    String[][] txt_ln18 = new String[][]{new String[]{"syscall"}, new String[]{"00400048"}};
-    String[][] txt_ln19 = new String[][]{new String[]{"EXIT"}, new String[]{"0040004c"}}; // "EXIT" -> li $v0 10"
-    String[][] txt_ln20 = new String[][]{new String[]{"li", "$v0", "10"}, new String[]{"0040004c"}};
-    String[][] txt_ln21 = new String[][]{new String[]{"syscall"}, new String[]{"00400050"}};
+    String[][] txt_ln7 = new String[][]{new String[]{"andi", "$t0", "$t4", "0x1"}, new String[]{"00400018"}};
+    String[][] txt_ln8 = new String[][]{new String[]{"beq", "$t0", "$zero", "ITS_EVEN"}, new String[]{"0040001c"}};
+    String[][] txt_ln9 = new String[][]{new String[]{"j", "ITS_ODD"}, new String[]{"00400020"}};
+    String[][] txt_ln10 = new String[][]{new String[]{"8"}, new String[]{"00400024"}}; // "ITS_EVEN" -> "li $v0 4"
+    String[][] txt_ln11 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400024"}};
+    String[][] txt_ln12 = new String[][]{new String[]{"la", "$a0", "even_output"}, new String[]{"00400028"}};
+    String[][] txt_ln13 = new String[][]{new String[]{"syscall"}, new String[]{"00400030"}};
+    String[][] txt_ln14 = new String[][]{new String[]{"j", "EXIT"}, new String[]{"00400034"}};
+    String[][] txt_ln15 = new String[][]{new String[]{"13"}, new String[]{"00400038"}}; // "ITS_ODD" -> "li $v0 4"
+    String[][] txt_ln16 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400038"}};
+    String[][] txt_ln17 = new String[][]{new String[]{"la", "$a0", "odd_output"}, new String[]{"0040003c"}};
+    String[][] txt_ln18 = new String[][]{new String[]{"syscall"}, new String[]{"00400044"}};
+    String[][] txt_ln19 = new String[][]{new String[]{"17"}, new String[]{"00400048"}}; // "EXIT" -> li $v0 10"
+    String[][] txt_ln20 = new String[][]{new String[]{"li", "$v0", "10"}, new String[]{"00400048"}};
+    String[][] txt_ln21 = new String[][]{new String[]{"syscall"}, new String[]{"0040004c"}};
     String data_exp_ret1 = "65746e45" +
             "6f792072" +
             "69207275" +
@@ -57,7 +57,6 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
             "0000000c" +
             "24020005" +
             "0000000c" +
-            "00026021" +
             "31880001" +
             "11000001" +
             "0810000f" +
@@ -88,21 +87,21 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
         text_sec_1.put("3", txt_ln4);
         text_sec_1.put("4", txt_ln5);
         // text_sec_1.put("5", txt_ln6);
-        text_sec_1.put("6", txt_ln7);
-        text_sec_1.put("7", txt_ln8);
-        text_sec_1.put("8", txt_ln9);
+        text_sec_1.put("5", txt_ln7);
+        text_sec_1.put("6", txt_ln8);
+        text_sec_1.put("7", txt_ln9);
         text_sec_1.put("ITS_EVEN:", txt_ln10);
-        text_sec_1.put("10", txt_ln11);
-        text_sec_1.put("11", txt_ln12);
-        text_sec_1.put("12", txt_ln13);
-        text_sec_1.put("13", txt_ln14);
+        text_sec_1.put("9", txt_ln11);
+        text_sec_1.put("10", txt_ln12);
+        text_sec_1.put("11", txt_ln13);
+        text_sec_1.put("12", txt_ln14);
         text_sec_1.put("ITS_ODD:", txt_ln15);
-        text_sec_1.put("15", txt_ln16);
-        text_sec_1.put("16", txt_ln17);
-        text_sec_1.put("17", txt_ln18);
+        text_sec_1.put("14", txt_ln16);
+        text_sec_1.put("15", txt_ln17);
+        text_sec_1.put("16", txt_ln18);
         text_sec_1.put("EXIT:", txt_ln19);
-        text_sec_1.put("19", txt_ln20);
-        text_sec_1.put("20", txt_ln21);
+        text_sec_1.put("18", txt_ln20);
+        text_sec_1.put("19", txt_ln21);
     }
 
     @Test

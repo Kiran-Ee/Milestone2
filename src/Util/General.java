@@ -115,7 +115,7 @@ public class General {
             case "and" -> new And(cleaned_instr);
             case "andi" -> new AndI(cleaned_instr);
             case "beq" -> new Beq(cleaned_instr);
-            case "bne" -> new Bne(cleaned_instr);
+           // case "bne" -> new Bne(cleaned_instr);
             case "j" -> new j(cleaned_instr);
             case "lui" -> new Lui(cleaned_instr);
             case "lw" -> new Lw(cleaned_instr);
@@ -135,7 +135,7 @@ public class General {
         PseudoOperation ps_op_obj = switch (cleaned_instr[0]) {
             case "li" -> new Li(cleaned_instr);
             case "la" -> new La(cleaned_instr);
-            case "blt" -> new Blt(cleaned_instr);
+            // case "blt" -> new Blt(cleaned_instr);
             default -> throw new IllegalArgumentException("Send invalid instruction to pseudo_instruction_factory");
         };
         hex_arr = ps_op_obj.get_hex();

@@ -2,7 +2,11 @@ package Operations;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedHashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
+
+// NEEDS TO BE FIXED
 
 //op-code: bne, rs, rt, offset
 //machine: bne, rs, rt, offset
@@ -64,7 +68,7 @@ public class BneTest {
 
     @Test
     public void return_correct_hex_valid_inst() {
-        Bne bne = new Bne(valid_inst); //000101", "$s0", "$s1", "0x0457"
+        Bne bne = new Bne(valid_inst);
         assertEquals("16110457", bne.get_hex()); //16110457
     }
     @Test

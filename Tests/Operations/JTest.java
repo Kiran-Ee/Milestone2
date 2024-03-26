@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// THIS NEEDS TO BE FIXED TO ONLY ALLOW ADDRESSES!
+
 //Format: J target
 //Machine: J, instr_index(26)
 public class JTest {
