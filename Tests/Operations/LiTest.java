@@ -3,7 +3,6 @@ package Operations;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 // Josiah
 class LiTest { //Only takes Hex values
     String[] li1 = new String[]{"li", "$a0", "0x1"};
