@@ -17,6 +17,23 @@ ALL FALLING:
         - emptyString()
             Error: Index 3 out of bounds for length 2
 
+    LI: - Majority failures are due to the public LI(String[] cleaned_instructions) method and gethex()
+        -setli1() - NumberFormatException: For input string: "0x1" under radix 16
+            ** possoble hex string to int conversion error
+
+        -setli2() - NumberFormatException: For input string: "0x10000001" under radix 16
+            ** possoble hex string to int conversion error
+
+        -setli3() - NumberFormatException: For input string: "0xFFFFFFFF" under radix 16
+            ** possoble hex string to int conversion error
+
+        -setli4() - array contents differ at index [0], expected: <lui $1, 00000000> but was: <3c010000>
+        -setli5() - IllegalArgumentException: Sent in incorrect range when signed or negative number and unsigned in 			 		                  			immediate_to_hex
+        	*failing at return gethex()
+
+        -setli6() - NumberFormatException: For input string: "4294967295" under radix 16
+        	* valueOf-possiblly at int shifted_for_lui = Integer.valueOf(cleaned_instructions[2],16) >>>4;
+
 ALL PASS:
     CalcDataSizeTest
 
@@ -29,5 +46,9 @@ ALL PASS:
     AsmParseTests
 
     CleanerFactoryTest
+
+    LA
+
+    BLT
 
 
