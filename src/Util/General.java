@@ -115,7 +115,7 @@ public class General {
             case "and" -> new And(cleaned_instr);
             case "andi" -> new AndI(cleaned_instr);
             case "beq" -> new Beq(cleaned_instr);
-           // case "bne" -> new Bne(cleaned_instr);
+            case "bne" -> new Bne(cleaned_instr);
             case "j" -> new j(cleaned_instr);
             case "lui" -> new Lui(cleaned_instr);
             case "lw" -> new Lw(cleaned_instr);

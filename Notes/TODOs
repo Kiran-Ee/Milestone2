@@ -1,11 +1,12 @@
 ####################################################################################################
 ---:TODOs:---
     Kiran:
-    - Pass tests for the methods in the Design Document.
+    - TextToHex
+    - AsmToAddress
     Tanja:
-    - Pass tests for the methods in the Design Document.
+    - Submit when Jo & Kiran are done.
     Josiah:
-    - Pass tests for the methods in the Design Document.
+    - DataToLittleEndian
 
 ALL FALLING:
     DataToLittelEndianTest
