@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 // Josiah
 class LaTest {
     String[] la1 = new String[]{"la", "$a0", "10010000"};
-    String[] la1_hex_arr = new String[]{"3c0103e9", "34240090"};//"lui $1, 00001001", "ori $4, $1, 00000000"
+    String[] la1_hex_arr = new String[]{"3c011001", "34240000"};//"lui $1, 00001001", "ori $4, $1, 00000000"
     String[] la2 = new String[]{"la", "$8", "10010040"};
-    String[] la2_hex_arr = new String[]{"lui $1, 00001001", "ori $8, $1, 00000040"};//"lui $1, 00001001", "ori $8, $1, 00000040"
+    String[] la2_hex_arr = new String[]{"3c011001", "34280040"};//"lui $1, 00001001", "ori $8, $1, 00000040"
     String[] la3 = new String[]{"la", "$s0", "10011900"};
-    String[] la3_hex_arr = new String[]{"lui $1, 00001001", "ori $16, $1, 00001900"};//"lui $1, 00001001", "ori $16, $1, 00001900"
+    String[] la3_hex_arr = new String[]{"3c011001", "34301900"};//"lui $1, 00001001", "ori $16, $1, 00001900"
 
 
     @Test
