@@ -7,6 +7,27 @@
     Josiah:
     - Pass tests for the methods in the Design Document.
 
+ALL FALLING:
+    DataToLittelEndianTest
+        -setHm1()
+        -setHm2()
+            Error MSG: Index 3 out of bounds for length 2
 
+    AsmToAddressTest
+        - emptyString()
+            Error: Index 3 out of bounds for length 2
+
+ALL PASS:
+    CalcDataSizeTest
+
+    CalcNextAddressTest
+
+    DeclaarationLineCleanerTest
+
+    FakeDataMemoryTest
+
+    AsmParseTests
+
+    CleanerFactoryTest
 
 
