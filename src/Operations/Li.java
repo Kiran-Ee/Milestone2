@@ -69,10 +69,10 @@ public class Li implements PseudoOperation {
     public String[] get_hex(){
         //Put two hexes in array arr[0] = lui.hex arr[1] = ori.hex
         if(add != null) {
-            return new String[]{add.get_hex()};
+            return new String[]{add.get_hex(), ""}; // KE: "I need this to return 2 elements for my method***"
         }
         if(luihalf == null){
-            return new String[]{orihalf.get_hex()};
+            return new String[]{orihalf.get_hex(), ""}; // KE:^
         }
         return new String[]{luihalf.get_hex(), orihalf.get_hex()};
     }

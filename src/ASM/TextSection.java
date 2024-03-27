@@ -10,7 +10,7 @@ public class TextSection {
     private final String ABS_BRANCH_INSTR = "j";
     private final String PSEUDO_INSTR = "li la blt";
 
-    public LinkedHashMap<String, String[][]> fake_text_memory(String[][] cleaned_text_sec) { // {“index or label” : [[“instruction”], [“address in memory”]] }
+    public LinkedHashMap<String, String[][]> fake_text_memory(String[][] cleaned_text_sec) { // {“index or label” : [[“instruction or index”], [“address in memory”]] }
         int counter = 0;
         String cur_addr = "00400000";
         LinkedHashMap<String, String[][]> lhm = new LinkedHashMap<>();
@@ -66,7 +66,7 @@ public class TextSection {
                 instr_arr[1] = textLbl_to_addr(instr_arr[1], text_mem);
             }
             if (PSEUDO_INSTR.contains(op)) { // li, la, blt
-                String[] hex_arr = General.pseudo_instruction_factory(instr_arr);  // needs to be different because returning string array
+                String[] hex_arr = General.pseudo_instruction_factory(instr_arr);
                 if (!hex_arr[0].isEmpty()) al.add(hex_arr[0]); // "if"'s are for "la" it can return 1 or 2 instructions.
                 if (!hex_arr[1].isEmpty()) al.add(hex_arr[1]);
             } else {
@@ -110,10 +110,13 @@ public class TextSection {
         return lbl_int - pc_plus_4_int;
     }
 
-    // Return absolute text mem address of the label (for j)
+    // Return absolute text mem address of the label (for j) ... IN WORD ADDRESSING
     private String textLbl_to_addr(String key, LinkedHashMap<String, String[][]> text_mem) {
         if (text_mem.get(key) != null) {
-            return (text_mem.get(key)[1][0]);
+            String memAddr_byte = (text_mem.get(key)[1][0]);
+            int wordAddress = Integer.parseInt(memAddr_byte, 16) / 4;
+            String memAddr_word = Integer.toHexString(wordAddress);
+            return "0x" + memAddr_word;
         } else {
             return "Invalid Key";
         }

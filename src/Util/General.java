@@ -139,8 +139,10 @@ public class General {
             default -> throw new IllegalArgumentException("Send invalid instruction to pseudo_instruction_factory");
         };
         hex_arr = ps_op_obj.get_hex();
-        for (int i = 0; i < hex_arr.length; i++)
+        for (int i = 0; i < hex_arr.length; i++) { //padding if leading value is "0" since java will remove it ...
+            if (hex_arr[i].isEmpty()) continue; // don't want to pad empty returns bc they're meaningless
             hex_arr[i] = pad_hex(hex_arr[i], 8);
+        }
 
         return hex_arr;
     }

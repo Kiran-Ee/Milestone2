@@ -12,7 +12,6 @@ class LaTest {
     String[] la3 = new String[]{"la", "$s0", "10011900"};
     String[] la3_hex_arr = new String[]{"3c011001", "34301900"};//"lui $1, 00001001", "ori $16, $1, 00001900"
 
-
     @Test
     public void setla1(){
         La la = new La(la1);

@@ -14,64 +14,51 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
     private LinkedHashMap<String, String[][]> text_sec_1; // {“index or label” : [[“instruction”], [“address in memory”]] }
 
     String[][] txt_ln1 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400000"}};
-    String[][] txt_ln2 = new String[][]{new String[]{"la", "$a0", "input_request"}, new String[]{"00400004"}};
-    String[][] txt_ln3 = new String[][]{new String[]{"syscall"}, new String[]{"0040000c"}};
-    String[][] txt_ln4 = new String[][]{new String[]{"li", "$v0", "5"}, new String[]{"00400010"}};
-    String[][] txt_ln5 = new String[][]{new String[]{"syscall"}, new String[]{"00400014"}};
+    String[][] txt_ln2 = new String[][]{new String[]{"la", "$a0", "input_request"}, new String[]{"00400008"}};
+    String[][] txt_ln3 = new String[][]{new String[]{"syscall"}, new String[]{"00400010"}};
+    String[][] txt_ln4 = new String[][]{new String[]{"li", "$v0", "5"}, new String[]{"00400014"}};
+    String[][] txt_ln5 = new String[][]{new String[]{"syscall"}, new String[]{"00400018"}};
     // String[][] txt_ln6 = new String[][]{new String[]{"move", "$t4", "$v0"}, new String[]{"00400018"}}; // NOT INCLUDED IN MIPS
-    String[][] txt_ln7 = new String[][]{new String[]{"andi", "$t0", "$t4", "0x1"}, new String[]{"00400018"}};
-    String[][] txt_ln8 = new String[][]{new String[]{"beq", "$t0", "$zero", "ITS_EVEN"}, new String[]{"0040001c"}};
-    String[][] txt_ln9 = new String[][]{new String[]{"j", "ITS_ODD"}, new String[]{"00400020"}};
-    String[][] txt_ln10 = new String[][]{new String[]{"8"}, new String[]{"00400024"}}; // "ITS_EVEN" -> "li $v0 4"
-    String[][] txt_ln11 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400024"}};
-    String[][] txt_ln12 = new String[][]{new String[]{"la", "$a0", "even_output"}, new String[]{"00400028"}};
-    String[][] txt_ln13 = new String[][]{new String[]{"syscall"}, new String[]{"00400030"}};
-    String[][] txt_ln14 = new String[][]{new String[]{"j", "EXIT"}, new String[]{"00400034"}};
-    String[][] txt_ln15 = new String[][]{new String[]{"13"}, new String[]{"00400038"}}; // "ITS_ODD" -> "li $v0 4"
-    String[][] txt_ln16 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400038"}};
-    String[][] txt_ln17 = new String[][]{new String[]{"la", "$a0", "odd_output"}, new String[]{"0040003c"}};
-    String[][] txt_ln18 = new String[][]{new String[]{"syscall"}, new String[]{"00400044"}};
-    String[][] txt_ln19 = new String[][]{new String[]{"17"}, new String[]{"00400048"}}; // "EXIT" -> li $v0 10"
-    String[][] txt_ln20 = new String[][]{new String[]{"li", "$v0", "10"}, new String[]{"00400048"}};
-    String[][] txt_ln21 = new String[][]{new String[]{"syscall"}, new String[]{"0040004c"}};
-    String data_exp_ret1 = "65746e45" +
-            "6f792072" +
-            "69207275" +
-            "6765746e" +
-            "203a7265" +
-            "756f5900" +
-            "6e692072" +
-            "65676574" +
-            "73692072" +
-            "45564520" +
-            "5900214e" +
-            "2072756f" +
-            "65746e69" +
-            "20726567" +
-            "4f207369" +
-            "00214444";
+    String[][] txt_ln7 = new String[][]{new String[]{"andi", "$t0", "$t4", "0x1"}, new String[]{"0040001c"}};
+    String[][] txt_ln8 = new String[][]{new String[]{"beq", "$t0", "$zero", "ITS_EVEN:"}, new String[]{"00400020"}};
+    String[][] txt_ln9 = new String[][]{new String[]{"j", "ITS_ODD:"}, new String[]{"00400024"}};
+    String[][] txt_ln10 = new String[][]{new String[]{"8"}, new String[]{"00400028"}}; // "ITS_EVEN" -> "li $v0 4"
+    String[][] txt_ln11 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"00400028"}};
+    String[][] txt_ln12 = new String[][]{new String[]{"la", "$a0", "even_output"}, new String[]{"0040002c"}};
+    String[][] txt_ln13 = new String[][]{new String[]{"syscall"}, new String[]{"00400034"}};
+    String[][] txt_ln14 = new String[][]{new String[]{"j", "EXIT:"}, new String[]{"00400038"}};
+    String[][] txt_ln15 = new String[][]{new String[]{"13"}, new String[]{"0040003c"}}; // "ITS_ODD" -> "li $v0 4"
+    String[][] txt_ln16 = new String[][]{new String[]{"li", "$v0", "4"}, new String[]{"0040003c"}};
+    String[][] txt_ln17 = new String[][]{new String[]{"la", "$a0", "odd_output"}, new String[]{"00400040"}};
+    String[][] txt_ln18 = new String[][]{new String[]{"syscall"}, new String[]{"00400048"}};
+    String[][] txt_ln19 = new String[][]{new String[]{"17"}, new String[]{"0040004c"}}; // "EXIT" -> li $v0 10"
+    String[][] txt_ln20 = new String[][]{new String[]{"li", "$v0", "10"}, new String[]{"0040004c"}};
+    String[][] txt_ln21 = new String[][]{new String[]{"syscall"}, new String[]{"00400050"}};
 
-    String text_exp_ret1 = "24020004" +
-            "3c011001" +
-            "34240000" +
-            "0000000c" +
-            "24020005" +
-            "0000000c" +
-            "31880001" +
-            "11000001" +
-            "0810000f" +
-            "24020004" +
-            "3c011001" +
-            "34240015" +
-            "0000000c" +
-            "08100013" +
-            "24020004" +
-            "3c011001" +
-            "3424002b" +
-            "0000000c" +
-            "2402000a" +
-            "0000000c";
-    String[] exp_ret1_strArr = new String[]{data_exp_ret1, text_exp_ret1};
+
+    String[] exp_ret1_strArr = new String[]{
+            "24020004",
+            "3c011001",
+            "34240000",
+            "0000000c",
+            "24020005",
+            "0000000c",
+            "31880001",
+            "11000001",
+            "0810000f",
+            "24020004",
+            "3c011001",
+            "34240015",
+            "0000000c",
+            "08100013",
+            "24020004",
+            "3c011001",
+            "3424002b",
+            "0000000c",
+            "2402000a",
+            "0000000c"
+    };
+
 
     @BeforeEach
     void setUp() { // allows each test method to use this data ... wasn't working w/o this
@@ -109,3 +96,22 @@ class TextToHexInstructionsTest { // I COPIED ALL THE LINES FROM THE GIVEN CODE 
         assertArrayEquals(exp_ret1_strArr, text_obj.text_to_hex_instructions(data_sec_1, text_sec_1));
     }
 }
+
+/* idk why i did this but here it is for future reference
+String data_exp_ret1 = "65746e45" +
+            "6f792072" +
+            "69207275" +
+            "6765746e" +
+            "203a7265" +
+            "756f5900" +
+            "6e692072" +
+            "65676574" +
+            "73692072" +
+            "45564520" +
+            "5900214e" +
+            "2072756f" +
+            "65746e69" +
+            "20726567" +
+            "4f207369" +
+            "00214444";
+ */

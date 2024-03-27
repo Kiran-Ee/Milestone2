@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // Josiah
 class LiTest { //Only takes Hex values
     String[] li1 = new String[]{"li", "$a0", "0x1"};
-    String[] li1_hex_arr = new String[]{"24040001"};
+    String[] li1_hex_arr = new String[]{"24040001", ""};
 
     String[] li2 = new String[]{"li", "$8", "0x10000001"};
     String[] li2_hex_arr = new String[]{"3c011000", "34280001"};
@@ -15,16 +15,16 @@ class LiTest { //Only takes Hex values
     String[] li3_hex_arr = new String[]{"3c01ffff", "3430ffff"};
 
     String[] li4 = new String[]{"li", "$a0", "1"};
-    String[] li4_hex_arr = new String[]{"24040001"};
+    String[] li4_hex_arr = new String[]{"24040001", ""};
 
     String[] li5 = new String[]{"li", "$a0", "65534"};
-    String[] li5_hex_arr = new String[]{"3404fffe"};
+    String[] li5_hex_arr = new String[]{"3404fffe", ""};
 
     String[] li6 = new String[]{"li", "$a0", "32767"};
-    String[] li6_hex_arr = new String[]{"24047fff"};
+    String[] li6_hex_arr = new String[]{"24047fff", ""};
 
     String[] li7 = new String[]{"li", "$a0", "-32768"};
-    String[] li7_hex_arr = new String[]{"24048000"};
+    String[] li7_hex_arr = new String[]{"24048000", ""};
 
     String[] li8 = new String[]{"li", "$a0", "-32769"};
     String[] li8_hex_arr = new String[]{"3c01ffff","34247fff"};
