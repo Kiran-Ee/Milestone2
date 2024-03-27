@@ -1,10 +1,9 @@
 ####################################################################################################
 ---:TODOs:---
     Kiran:
-    - TextToHex
-        - Fix "0x" issue
-            - Correct "Li"
     - AsmToAddress
+        - Fix fake_text_memory: doesn't account for pseudos
+            - Take Josiah's logic and turn into method for resusability
     Tanja:
     - Submit when Jo & Kiran are done.
     Josiah:

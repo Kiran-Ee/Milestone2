@@ -7,11 +7,14 @@ public class Li implements PseudoOperation {
     private Lui luihalf;
     private Ori orihalf;
     private Addiu add;
+    public String flag = ""; // couldn't figure out how to separte your constructor logic quickly so this will help with fake_text_memory to find out how much each instructino takes up in memory
+
     public Li(String[] cleaned_instructions){
         if(!(cleaned_instructions[2].startsWith("0x"))){
             if(cleaned_instructions[2].startsWith("-")){
                 if(Integer.parseInt(cleaned_instructions[2]) > -32769) {
                     cleaned_instructions[2] = immediate_to_hex(cleaned_instructions[2], true);
+                    flag = "Addiu";
                     add = new Addiu(new String[]{"addiu", cleaned_instructions[1], "$0", "0x" + cleaned_instructions[2]});
                 } else {
                     int immediate = Integer.parseInt(cleaned_instructions[2]); // Example signed immediate value from li instruction
@@ -19,15 +22,17 @@ public class Li implements PseudoOperation {
                     // Extract the upper and lower 16 bits
                     int upper = (immediate & 0xFFFF0000) >>> 16;
                     int lower = immediate & 0xFFFF;
-
+                    flag = "Lui + Ori";
                     luihalf = new Lui(new String[]{"lui", "$at", "0x" + Integer.toHexString(upper)});
                     orihalf = new Ori(new String[]{"ori", cleaned_instructions[1], "$at", "0x" + Integer.toHexString(lower)});
                 }
             } else {
                 cleaned_instructions[2] = immediate_to_hex(cleaned_instructions[2], false);
                 if(Integer.parseInt(cleaned_instructions[2], 16) <= 0x7FFF){
+                    flag = "Addiu";
                     add = new Addiu(new String[]{"addiu", cleaned_instructions[1], "$0", "0x" + cleaned_instructions[2]});
                 } else {
+                    flag = "Ori";
                     orihalf = new Ori(new String[]{"ori", cleaned_instructions[1], "$0", "0x" + cleaned_instructions[2]});
                 }
 
@@ -35,14 +40,17 @@ public class Li implements PseudoOperation {
         } else {
             cleaned_instructions[2] = cleaned_instructions[2].substring(2); //Remove 0x
             if(cleaned_instructions[2].length() < 4){
+                flag = "Addiu";
                 add = new Addiu(new String[]{"addiu", cleaned_instructions[1], "$0", cleaned_instructions[2]});
             } else {
                 var first = "0x" + hexFix(cleaned_instructions[2].substring(0, cleaned_instructions[2].length() - 4)); //Gets first part and makes it into 4 length for lui
                 var last = "0x" + cleaned_instructions[2].substring(cleaned_instructions[2].length() - 4); //Gets last 4 for ori
                 if (!first.equals("0x0000")) {
+                    flag = "Lui + Ori";
                     luihalf = new Lui(new String[]{"lui", "$at", first});
                     orihalf = new Ori(new String[]{"ori", cleaned_instructions[1], "$at", last});
                 } else {
+                    flag = "Ori";
                     orihalf = new Ori(new String[]{"ori", cleaned_instructions[1], "$0", last});
                 }
             }
@@ -69,10 +77,10 @@ public class Li implements PseudoOperation {
     public String[] get_hex(){
         //Put two hexes in array arr[0] = lui.hex arr[1] = ori.hex
         if(add != null) {
-            return new String[]{add.get_hex(), ""}; // KE: "I need this to return 2 elements for my method***"
+            return new String[]{add.get_hex(), ""};
         }
         if(luihalf == null){
-            return new String[]{orihalf.get_hex(), ""}; // KE:^
+            return new String[]{orihalf.get_hex(), ""};
         }
         return new String[]{luihalf.get_hex(), orihalf.get_hex()};
     }

@@ -21,8 +21,13 @@ public class GeneralASM {
         String[] data_dump_arr = data_obj.data_to_little_endian(data_memory);
         String[] text_dump_arr = text_obj.text_to_hex_instructions(data_memory, text_memory);
 
-        String data_dump_file = Arrays.toString(data_dump_arr);
-        String text_dump_file = Arrays.toString(text_dump_arr);
+        String data_dump_file = "";
+        for (int i = 0; i<data_dump_arr.length; i++)
+            data_dump_file += (i+1 != data_dump_arr.length) ? data_dump_arr[i] + "\n" : data_dump_arr[i] ;
+
+        String text_dump_file = "";
+        for (int i = 0; i<text_dump_arr.length; i++)
+            text_dump_file += (i+1 != text_dump_arr.length) ? text_dump_arr[i] + "\n" : text_dump_arr[i] ;
 
         return new String[]{data_dump_file, text_dump_file};
     }
