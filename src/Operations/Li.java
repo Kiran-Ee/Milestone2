@@ -4,6 +4,7 @@ public class Li implements PseudoOperation {
     private String[] originalInstruction;
     private Lui luihalf;
     private Ori orihalf;
+
     public Li(String[] cleaned_instructions){
         cleaned_instructions[2] = cleaned_instructions[2].substring(2);
         var first = "0000";

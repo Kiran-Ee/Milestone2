@@ -2,6 +2,8 @@
 ---:TODOs:---
     Kiran:
     - TextToHex
+        - Fix "0x" issue
+            - Correct "Li"
     - AsmToAddress
     Tanja:
     - Submit when Jo & Kiran are done.
