@@ -93,8 +93,8 @@ public class TextSection {
 
     // Helper for "relative_branch_offset_calc": Return the index of a key inside text_mem
     private static String textLbl_to_index(String key, LinkedHashMap<String, String[][]> text_mem) {
-        if (text_mem.get(key) != null) {
-            return (text_mem.get(key)[0][0]);
+        if (text_mem.get(key + ":") != null) {
+            return (text_mem.get(key+ ":")[0][0]);
         } else {
             return "Invalid Key";
         }
@@ -112,8 +112,8 @@ public class TextSection {
 
     // Return absolute text mem address of the label (for j) ... IN WORD ADDRESSING
     private String textLbl_to_addr(String key, LinkedHashMap<String, String[][]> text_mem) {
-        if (text_mem.get(key) != null) {
-            String memAddr_byte = (text_mem.get(key)[1][0]);
+        if (text_mem.get(key + ":") != null) {
+            String memAddr_byte = (text_mem.get(key+ ":")[1][0]);
             int wordAddress = Integer.parseInt(memAddr_byte, 16) / 4;
             String memAddr_word = Integer.toHexString(wordAddress);
             return "0x" + memAddr_word;

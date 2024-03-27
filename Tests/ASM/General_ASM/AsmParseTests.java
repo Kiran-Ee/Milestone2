@@ -43,6 +43,8 @@ public class AsmParseTests {
                     "#comment line"+
                     "j RandomLabel#withacommen\n" +
                     "add $s1, $s2, $3";
+
+
     String[] asm1_arr = new String[]{corrected_data_file1 , corrected_text_file1};
 
     @Test
