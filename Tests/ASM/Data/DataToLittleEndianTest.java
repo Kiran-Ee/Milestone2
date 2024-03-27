@@ -52,11 +52,13 @@ class DataToLittleEndianTest {
 
     @Test
     void setHm1() {
-        assertArrayEquals(exp_return_hm1, data_sec.data_to_little_endian(hm1));
+        String[] testing_arr = data_sec.data_to_little_endian(hm1);
+        assertArrayEquals(exp_return_hm1, testing_arr);
     }
 
     @Test
     void setHm2() {
-        assertArrayEquals(exp_return_hm2, data_sec.data_to_little_endian(hm2));
+        String[] testing_arr = data_sec.data_to_little_endian(hm2);
+        assertArrayEquals(exp_return_hm2, testing_arr);
     }
 }
