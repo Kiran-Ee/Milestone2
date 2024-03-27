@@ -17,8 +17,8 @@ class LiTest { //Only takes Hex values
     String[] li4 = new String[]{"li", "$a0", "1"};
     String[] li4_hex_arr = new String[]{"24040001"};
 
-    String[] li5 = new String[]{"li", "$a0", "65535"};
-    String[] li5_hex_arr = new String[]{"3404ffff"};
+    String[] li5 = new String[]{"li", "$a0", "65534"};
+    String[] li5_hex_arr = new String[]{"3404fffe"};
 
     String[] li6 = new String[]{"li", "$a0", "32767"};
     String[] li6_hex_arr = new String[]{"24047fff"};
@@ -48,5 +48,25 @@ class LiTest { //Only takes Hex values
     public void setli4(){
         Li li = new Li(li4);
         assertArrayEquals(li4_hex_arr, li.get_hex());
+    }
+    @Test
+    public void setLi5(){
+        Li li = new Li(li5);
+        assertArrayEquals(li5_hex_arr, li.get_hex());
+    }
+    @Test
+    public void setli6(){
+        Li li = new Li(li6);
+        assertArrayEquals(li6_hex_arr, li.get_hex());
+    }
+    @Test
+    public void setLi7(){
+        Li li = new Li(li7);
+        assertArrayEquals(li7_hex_arr, li.get_hex());
+    }
+    @Test
+    public void setli8(){
+        Li li = new Li(li8);
+        assertArrayEquals(li8_hex_arr, li.get_hex());
     }
 }
