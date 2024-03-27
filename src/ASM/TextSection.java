@@ -23,8 +23,6 @@ public class TextSection {
             String counter_str = "" + counter;
 
             if (op.contains(":")) { // label
-                cur_addr = DataSection.calc_next_address(cur_addr, 4);
-                cur_addr = General.pad_hex(cur_addr, 8); // padding 0's bc "00" gets removed
                 lhm.put(op, new String[][]{new String[]{counter_str}, new String[]{cur_addr}});
             } else {
                 lhm.put(counter_str, new String[][]{instr, new String[]{cur_addr}});
