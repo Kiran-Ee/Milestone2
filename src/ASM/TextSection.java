@@ -42,7 +42,7 @@ public class TextSection {
     private int determine_num_instr(String op, String[] instr) {
         if ("li".equals(op)) {
             Li flag = new Li(instr);
-            if ("Addiu".equals(flag) || "Ori".equals(flag)) {
+            if ("Addiu".equals(flag.flag) || "Ori".equals(flag.flag)) {
                 return 1;
             } else {
                 return 2; // Lui + Ori
