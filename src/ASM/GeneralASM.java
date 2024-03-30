@@ -21,6 +21,7 @@ public class GeneralASM {
         String[] data_dump_arr = data_obj.data_to_little_endian(data_memory);
         String[] text_dump_arr = text_obj.text_to_hex_instructions(data_memory, text_memory);
 
+        // creating strings with line breaks ...
         String data_dump_file = "";
         for (int i = 0; i<data_dump_arr.length; i++)
             data_dump_file += (i+1 != data_dump_arr.length) ? data_dump_arr[i] + "\n" : data_dump_arr[i] ;

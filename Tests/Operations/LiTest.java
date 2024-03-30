@@ -29,6 +29,11 @@ class LiTest { //Only takes Hex values
     String[] li8 = new String[]{"li", "$a0", "-32769"};
     String[] li8_hex_arr = new String[]{"3c01ffff","34247fff"};
 
+    String[] li9 = new String[]{"li", "$a0", "42"};
+    String[] li9_hex_arr = new String[]{"2411002a",""};
+
+    // ADD CASE FOR "ORI" AND ASK JOSIAH
+
     @Test
     public void setli1(){
         Li li = new Li(li1);
@@ -68,5 +73,10 @@ class LiTest { //Only takes Hex values
     public void setli8(){
         Li li = new Li(li8);
         assertArrayEquals(li8_hex_arr, li.get_hex());
+    }
+    @Test
+    public void setli9(){
+        Li li = new Li(li9);
+        assertArrayEquals(li9_hex_arr, li.get_hex());
     }
 }

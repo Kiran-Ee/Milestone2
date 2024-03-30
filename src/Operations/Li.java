@@ -55,7 +55,6 @@ public class Li implements PseudoOperation {
                 }
             }
         }
-
         originalInstruction = cleaned_instructions;
     }
 
@@ -71,7 +70,6 @@ public class Li implements PseudoOperation {
         } else {
             return "0000";
         }
-
     }
 
     public String[] get_hex(){
