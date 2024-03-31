@@ -19,6 +19,16 @@ public class CleanerFactoryTest {
     String[] instr3 = new String[]{"LotsOfLineBreaks", "Line"};
     String[][] cleaned_data_file1 = new String[][]{instr1, instr2, instr3};
 
+    String data_file2 =
+            "\n" +
+                    "        input_request:        .asciiz        \"Enter your integer: \"\n" +
+                    "        even_output:        .asciiz        \"Your integer is EVEN!\"\n" +
+                    "        odd_output:        .asciiz        \"Your integer is ODD!\"\n" +
+                    "\n";
+    String[] dataLn1 = new String[]{"input_request", "Enter your integer: "};
+    String[] dataLn2 = new String[]{"even_output", "Your integer is EVEN!"};
+    String[] dataLn3 = new String[]{"odd_output", "Your integer is ODD!"};
+    String[][] cleaned_data_file2 = new String[][]{dataLn1, dataLn2, dataLn3};
 
     String text_file1 =
             "add $s1, $s3, $s\n" +
@@ -38,7 +48,7 @@ public class CleanerFactoryTest {
     String[] instr7 = new String[]{"addiu", "$s1", "$s2", "-10"};
     String[] instr8 = new String[]{"add", "$s5", "$s2", "$3"};
 
-    String[][] cleaned_data_file2 = new String[][]{instr4, instr5, instr6, instr7, instr8};
+    String[][] cleaned_text_file2 = new String[][]{instr4, instr5, instr6, instr7, instr8};
 
     @Test
     void setCleaned_data_file1() {
@@ -46,7 +56,13 @@ public class CleanerFactoryTest {
     }
 
     @Test
-    void setCleaned_text_file1() {
-        assertArrayEquals(cleaned_data_file2, sec.cleaner_factory(false, text_file1));
+    void setCleaned_data_file2() {
+        assertArrayEquals(cleaned_data_file2, sec.cleaner_factory(true, data_file2));
     }
+
+    @Test
+    void setCleaned_text_file1() {
+        assertArrayEquals(cleaned_text_file2, sec.cleaner_factory(false, text_file1));
+    }
+
 }

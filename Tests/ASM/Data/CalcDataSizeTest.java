@@ -20,35 +20,35 @@ class CalcDataSizeTest {
 
     @Test
     void setdata1() {
-        assertEquals(21 ,data_sec.calc_data_size(data1[0], data1[1]));
+        assertEquals(21 ,data_sec.calc_data_size( data1[1]));
     }
     @Test
     void setdata2() {
-        assertEquals(22 ,data_sec.calc_data_size(data2[0],data2[1]));
+        assertEquals(22 ,data_sec.calc_data_size(data2[1]));
     }
     @Test
     void setdata3() {
-        assertEquals(20 ,data_sec.calc_data_size(data3[0],data3[1]));
+        assertEquals(20 ,data_sec.calc_data_size(data3[1]));
     }
     @Test
     void setdata4() {
-        assertEquals(5 ,data_sec.calc_data_size(data4[0],data4[1]));
+        assertEquals(5 ,data_sec.calc_data_size(data4[1]));
     }
     @Test
     void setdata5() {
-        assertEquals(3 ,data_sec.calc_data_size(data5[0],data5[1]));
+        assertEquals(3 ,data_sec.calc_data_size(data5[1]));
     }
     @Test
     void setdata6() {
-        assertEquals(2 ,data_sec.calc_data_size(data6[0],data6[1]));
+        assertEquals(2 ,data_sec.calc_data_size(data6[1]));
     }
-    @Test
-    void setDataW1() {
-        assertEquals(4 ,data_sec.calc_data_size(dataW1[0],dataW1[1]));
-    }
-
-    @Test
-    void setDataW2() {
-        assertEquals(4 ,data_sec.calc_data_size(dataW2[0],dataW2[1]));
-    }
+//    @Test
+//    void setDataW1() {
+//        assertEquals(4 ,data_sec.calc_data_size(dataW1[1]));
+//    }
+//
+//    @Test
+//    void setDataW2() {
+//        assertEquals(4 ,data_sec.calc_data_size(dataW2[1]));
+//    }
 }

@@ -15,7 +15,7 @@ public class DataSection {
         for(String[] instr: cleaned_data_sec){
             String label = instr[0];
             String data_val = instr[1];
-            int cur_size = calc_data_size(".asciiz", data_val);
+            int cur_size = calc_data_size(data_val);
 
             lhm.put(label, new String[]{data_val, cur_address});
 
@@ -24,12 +24,8 @@ public class DataSection {
         return lhm;
     }
 
-    public int calc_data_size(String data_type, String data) {
-        if (data_type.equals(".asciiz")){ // no .word for this assignment ...
+    public int calc_data_size( String data) {
             return data.length() + 1;
-        } else{
-            return 4;
-        }
     }
 
     public static String calc_next_address(String prev_address, int current_size) {
@@ -45,17 +41,23 @@ public class DataSection {
         List<String> cleanedPart = new ArrayList<>();
         int start_ind = General.find_non_space(0, line);
         int colon_ind = line.indexOf(":");
-        cleanedPart.add(line.substring(start_ind, colon_ind));
+        String s = line.substring(start_ind, colon_ind);
+        cleanedPart.add(s);
 
         //data type
         start_ind = General.find_non_space(colon_ind + 1, line);
-        int space_ind = line.indexOf(" ", start_ind + 1);
-        //cleanedPart.add(line.substring(start_ind, space_ind)); // don't add data type
+        int space_ind = line.indexOf(" ", start_ind);
+        int tab_ind = line.indexOf('\t', start_ind);
+        int end_ind = Math.min(space_ind, tab_ind);
+        s = line.substring(start_ind, end_ind);
+
+        //cleanedPart.add(); // don't add data type
 
         // data
-        start_ind = General.find_non_space(space_ind + 1, line);
+        start_ind = General.find_non_space(end_ind + 1, line);
         int last_qoute_ind = line.indexOf("\"", start_ind + 1);
-        cleanedPart.add(line.substring(start_ind+1, last_qoute_ind));
+        s = line.substring(start_ind+1, last_qoute_ind);
+        cleanedPart.add(s);
 
         return cleanedPart.toArray(new String[0]);
     }
